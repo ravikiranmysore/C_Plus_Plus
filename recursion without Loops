@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+static int i = 1;
+ 
+class Base {
+public:
+    Base()
+    {
+        cout << i << endl;
+        i++;
+    }
+};
+
+int main()
+{
+    Base b[10];
+    return 0;
+}
