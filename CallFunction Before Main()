@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+void function()
+{
+    cout << "this is function"<< endl;
+}
+
+class Base {
+public:
+    Base()
+    {
+        function();
+    }
+};
+
+Base b;
+int main()
+{
+    cout << "This is inside Main()"<< endl;
+    return 0;
+}
+
