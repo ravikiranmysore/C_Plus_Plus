@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+     int _a;
+      virtual void func() // adding virtual will cause dynamic binding
+      {
+         cout << " Base fun " << endl;
+     }
+};
+class B : public A
+{
+public:
+     int _b;
+     void func() {
+          cout << " Derived fun " << endl;
+     }
+};
+void myFun(A *obj)
+{
+    obj->func(); // this is static binding, where is is binded already
+}
+
+int main()
+{
+    myFun(new A); // this is derived binding, during run time.
+    myFun(new B);
+    return 0;
+}
