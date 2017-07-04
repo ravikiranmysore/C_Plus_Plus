@@ -1,0 +1,81 @@
+// what is daimond problem in c++
+
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+     int _a;
+};
+class B : public A
+{
+public:
+     int _b;
+};
+class C : public A
+{
+public:
+     int _c;
+};
+class D :public B,public C
+{
+public:
+     int _d;
+};
+int main()
+{
+    D d;
+    d._b = 10;
+    d._c = 1;
+    d._d = 20;
+  //  d._a = 1111; // here is the error
+    return 0;
+}
+
+/*
+   A
+  / \
+ B   C
+  \ /
+   D
+
+   this is called Diamond problem.
+   A object memory _a
+   B has _a and _b
+   C has _a and _c
+   D has _a _b _a _c _d
+   this ambiguity can be removed by making virtual of derived call
+   class B : virtual public A
+   class C : virtual public A
+   it will remove eithe one A, Virtual is one time only
+
+
+class A {
+public:
+     int _a;
+};
+class B :virtual public A
+{
+public:
+     int _b;
+};
+class C : virtual public A
+{
+public:
+     int _c;
+};
+class D :public B,public C
+{
+public:
+     int _d;
+};
+int main()
+{
+    D d;
+    d._b = 10;
+    d._c = 1;
+    d._d = 20;
+   d._a = 1111;
+    return 0;
+}
+*/
