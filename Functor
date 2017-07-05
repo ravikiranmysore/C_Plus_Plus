@@ -1,0 +1,36 @@
+#include <iostream>
+struct absValue
+{
+    float operator()(float f)
+    {
+        return f > 0 ? f : -f;
+    }
+};
+class MUL {
+    int _val;
+public:
+    MUL(){}
+    MUL(int val)
+    {
+        _val = val;
+    }
+
+    int operator()(int val) {
+        return val*_val;
+    }
+};
+
+int main()
+{
+    using namespace std;
+    float f = -123.45;
+    absValue aObj;
+    float abs_f = aObj(f);
+    cout << "f     = " << f << "\nabs_f = " << abs_f << endl;
+
+
+    MUL mul12(20);
+    cout << mul12(2)<< endl;
+    cout << mul12(3)<< endl;
+    return 0;
+}
