@@ -1,0 +1,32 @@
+//decltype : it checks the type of expression -> trailing return type syntax
+#include <iostream>
+
+template<typename T1,typename T2>
+auto add(T1 a,T2 b) -> decltype(a+b) {
+    return a+b;
+}
+/*
+  T2 add(T1 a,T2 b) {
+    return a+b;
+    // here the output will have ambiguity,
+    // and this problem was solved in C++11
+}
+*/
+
+int main()
+{
+    using namespace std;
+
+    int a = 10,b , c = 3;
+    (b = c) = a;
+    cout << "A : " << a << endl;
+    cout << "B : " << b << endl;
+    cout << "C : " << c << endl;
+
+    cout << "\n";
+    cout<<add(1,1.8)<< endl;
+    cout<<add(1.8,1)<< endl;
+
+
+    return 0;
+}
