@@ -1,0 +1,16 @@
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+class Base {};
+int main()
+{
+    auto x  = 20;
+    auto y  = 20.05;
+    auto b = Base();
+    auto b1 = new Base();
+    cout << x << "-> "<< typeid(x).name() << endl << "\n";
+    cout << y << "-> "<<  typeid(y).name() << endl<< "\n";
+    cout  << "-> "<<  typeid(b).name() << endl<< "\n";
+    cout  << "--> "<<  typeid(b1).name() << endl<< "\n";
+    return 0;
