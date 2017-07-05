@@ -1,0 +1,37 @@
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+void print(int val)
+{
+    cout << "for_each---> print :  "<< val << endl;
+}
+
+int main()
+{
+    vector<int> Vec;
+
+    // for loop
+    for(int i = 0; i < 5; i++)
+    {
+        Vec.push_back(i);
+    }
+
+    // for displaying
+    for(int i : Vec)
+    {
+        cout << " for : " << i << endl;
+    }
+
+    // for each loop
+    for_each(Vec.begin()+3,Vec.end(),[](int i)
+    {
+        cout << "for_each->begin : "<< i << endl;
+    });
+
+    for_each(Vec.begin(),Vec.end(),print);
+
+    return 0;
+}
