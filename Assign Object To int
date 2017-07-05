@@ -1,0 +1,25 @@
+// how to assign any OBJECT to primitive datatype+
+
+#include <iostream>
+using namespace std;
+
+class Base {
+    int var;
+public:
+    Base() {}
+    Base(int val) : var{val}
+    {}
+    operator int() const //It defines an implicit conversion for an object of the class to a int variable.
+    { 
+        return var;
+    }
+};
+
+int main()
+{
+   Base b(455221325);
+   int temp = b;
+   cout <<temp << endl;
+    return 0;
+}
+
