@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int b_var;
+public:
+    Base();
+    Base(int var) // adding "explicit" in front of Base->this causes error,
+                  // this avoid "implicit call to constructor.
+    {
+        b_var = var;
+    }
+    void Print()
+    {
+        cout << b_var << endl;
+    }
+};
+
+void function(Base b)
+{
+    b.Print();
+}
+
+int main()
+{
+    Base obj1(10);    // Noramal call to constructor
+    Base obj2 = 20;   // Implicit call to constructor-> complier will fetch similar prototype(int)
+    function(obj1);   // Normal call to constructor-> if obj2-> 20 will be the output
+    function(30);     //Implicit call to constructor.
+    return 0;
+}
