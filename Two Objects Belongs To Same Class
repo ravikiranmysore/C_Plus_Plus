@@ -1,0 +1,29 @@
+#include <iostream>
+#include <typeinfo>
+using namespace std;
+
+class A{};
+class B{};
+
+int main()
+{
+  A a1,a2;
+  B b1,b2;
+
+  if(typeid(a1) == typeid(b1))
+      cout << "1.Equal"<< endl;
+  else
+      cout << "1.Not Equal"<< endl;
+
+  if(typeid(a1) == typeid(a1))
+      cout << "2.Equal"<< endl;
+  else
+      cout << "2.Not Equal"<< endl;
+
+  if(&a1 == &a2)
+      cout << "3.Equal"<< endl;
+  else
+      cout << "3.Not Equal"<< endl;
+
+    return 0;
+}
