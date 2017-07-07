@@ -1,0 +1,29 @@
+
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    float _bfloat; // size = 4
+public:
+    int _bint; // size = 4
+};
+
+int main()
+{
+    Base b1,b2;
+    cout << sizeof(Base)<< endl; // 4 + 4
+    cout << sizeof(b1)<< endl;
+    cout << sizeof(b2)<< endl;
+    Base b3[2];
+    cout << sizeof(b3)<< endl;// 2 * 4+4
+    if(&b1 == &b2)
+    {
+        cout << "Yes" << endl;
+    }
+    else
+    {
+        cout << "No" << endl;
+    }
+    return 0;
+}
