@@ -1,0 +1,24 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    Base()
+    {
+        cout << "Base Constructor \n"<< endl;
+    }
+    ~Base()
+    {
+        cout << "Base Destructor \n"<< endl;
+    }
+};
+
+int main()
+{
+    Base();// this will call both constructor and destructor at the same time
+    Base obj;// constructor - something - Destructor
+    cout << "something"<< endl;
+    obj.~Base();// dont do it explicitally(DESTRUCTOR).this will give C-D-D
+    return 0;
+}
