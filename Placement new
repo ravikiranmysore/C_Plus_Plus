@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    Base()
+    {
+        cout << "Base Constructor "<< endl;
+    }
+    ~Base()
+    {
+        cout << "Base Destructor "<< endl;
+    }
+};
+
+int main()
+{
+    cout << "Normal Case : " << endl;
+    Base *obj = new Base();
+    Base *obj4 = new Base();
+    Base *obj5 = new Base();
+    delete obj;
+    delete obj4;
+    delete obj5;
+
+    cout << "\nPlacement New Case:"<< endl;
+    char *memory = new char[10*sizeof(Base)];//Memory Pool
+    //if int = 4; memory->[10*4]
+    Base *obj1 = new( &memory[0]) Base(); // here you are asking memory
+    Base *obj2 = new( &memory[4]) Base();
+    Base *obj3 = new( &memory[8]) Base();
+    obj1->~Base();
+    obj2->~Base();
+    obj3->~Base();
+    
+    delete[] memory;
+ 
+    return 0;
+}
