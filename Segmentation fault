@@ -1,0 +1,14 @@
+//  Segmentation falut-> memory violation
+//stack overflow,read violation,write violation and many more
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int * p1 = NULL;
+    * p1 = 10;
+
+    cout <<  *p1 << endl;
+
+  return 0;
+}
