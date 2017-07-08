@@ -1,0 +1,39 @@
+// BY default the size of the class is 1, to differentiate objects
+#include <iostream>
+using namespace std;
+
+
+int main()
+{
+
+    int num = 3;//0011
+
+    int bitPos =2;//3 2 1 0-> 0111 = 7
+    num |=(1 <<bitPos);
+    cout << "3-> shift : "<< num << endl;
+
+/*0001->shiftbit = 1
+ *0100 -> 2 time left shift = 1 left shifted
+ * Now "OR" operation
+ * 0011 ->3
+ * 0100 -> 2(1 left shifted)
+ * -----
+ * 0111---> 7
+ * -----
+*/
+    // Unshift
+    num &= ~(1 <<bitPos);
+    cout << "Unshift : "<< num << endl;
+
+    //toggle bit
+    num ^= (1 <<bitPos);
+    cout << "Toggle : "<< num << endl;
+
+    int bit = (num >> bitPos) & 1;
+    cout << "Bit left shift : "<< bit << endl;
+
+    int n = 1;
+    num = num & ~(1<< n) |(bit << n);
+    cout << "Change nth Bit 2nd no with 1-> 7 : "<<num << endl;
+  return 0;
+}
