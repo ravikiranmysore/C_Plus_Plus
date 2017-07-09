@@ -32,10 +32,9 @@ int main()
 {
     Base b1(50); // this rewritten as
                  // Base(&b1,10);
-    Base b2 = b1; ;
-    cout << b2 << endl;
+    Base b2 = b1;
     operator<<(cout,b2);// this is overloading,sending cout to lhs
-    cout << endl;
+    cout << b2 << endl; // friend and overload can print object -> b2
     // if cout << 10 << endl;--> ambiguity as there is already a method defined in main
     return 0;
 }
