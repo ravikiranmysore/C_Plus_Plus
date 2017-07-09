@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+void sub(int x)
+{
+  x -= 1;
+cout << "3: "<< x << endl;
+}
+
+void add(int& x)
+{
+  x += 1;
+  sub(x);
+ cout << "2: "<< x << endl;
+}
+
+int main()
+{
+    int x = 20;
+    add(x);
+    cout << "1: "<< x << endl;
+    return 0;
+}
