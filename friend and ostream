@@ -5,14 +5,14 @@ class Base {
     int _x;
 public:
     Base(int x) :_x(x){}
-    
+
     /* this->pointer
      *  Base(Base *this,int x) : this->_x(x)
      * {
      *   this->_x;
      * }
     */
-    
+
     // Copy constructor(setter) and return(getter)
     Base(const Base& obj)
     {
@@ -21,6 +21,7 @@ public:
     // friend ostream& operator << ( Base *this, ostream& os,const Base obj);
     // ostream& os ---> ref of os i.e cout
     friend ostream& operator << (ostream& os,const Base obj);
+
 };
 ostream& operator << (ostream& os,const Base obj)
 {
@@ -31,10 +32,13 @@ ostream& operator << (ostream& os,const Base obj)
 int main()
 {
     Base b1(50); // this rewritten as
-                 // Base(&b1,10);
+    // Base(&b1,10);
     Base b2 = b1;
-    operator<<(cout,b2);// this is overloading,sending cout to lhs
-    cout << b2 << endl; // friend and overload can print object -> b2
+    cout << b2 << endl; // you can use this
+
+    Base b3(89);
+    operator<<(cout ,b3) << endl;
+    cout << "Only with Object : "<< b3 << endl;
     // if cout << 10 << endl;--> ambiguity as there is already a method defined in main
     return 0;
 }
