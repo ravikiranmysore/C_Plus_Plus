@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+#pragma pack(1)
+
+class Base
+{
+  char c;
+public:
+    Base() {}
+    Base(int x) { }
+     Base(int x,int y) { }
+};
+
+class Derived : public Base
+{
+    int _x;
+};
+
+
+int main()
+{
+   cout << sizeof(Base) << endl;
+   cout << sizeof(Derived) << endl; // this is 4, when Base is empty
+   // if you have int _y --> then size of base = 4, size of derived = 8
+   // #pragma pack(1) -> then the size will be -> base = 1,derived = 5(instead of 4)
+    return 0;
+}
