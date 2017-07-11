@@ -1,0 +1,38 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int _x;
+public:
+    Base() {}
+    // Base(int x) : _x(x){} ---> +++++++
+    void setValue(int x)
+    {
+        _x= x;
+    }
+    int getValue()
+    {
+        return _x;
+    }
+    
+};
+
+class Bingo {
+    Base b;//uses default constructor
+public:
+    Bingo(int x) 
+    //: b(x) {} ---> +++++ ,can also do this,without setvalue
+    {
+        // b._x = x;->error as you cannt set value,as _x is private
+        b.setValue(x);
+    }
+    Base& getBase() { return b; }
+};
+
+int main()
+{
+    Bingo b(10);
+    cout << b.getBase().getValue() << endl;
+    return 0;
+}
