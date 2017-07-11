@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+  // const int _x; // if no const->works,if const ->error
+    int &_x;       // this is same for &x->use init list
+public:
+    Base(int x): _x{x} {} // you have to initilaize list not -->{ _x = x;}
+    int getValue() { return _x; }
+};
+
+int main()
+{
+    Base b(10);
+    cout << b.getValue() << endl;
+    return 0;
+}
