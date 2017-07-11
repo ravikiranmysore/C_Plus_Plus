@@ -94,26 +94,6 @@ using namespace std;
 
 class Base
 {
-public:
-    int x;
-    int getValue()
-    {
-        return x;
-    }
-};
-
-int main()
-{
-    Base a = {10};
-    cout << a.getValue()  <<endl;
-    return 0;
-}
-
-#include <iostream>
-using namespace std;
-
-class Base
-{
     int x;
 public:
     Base(int x): x(x) {} //we need constructor if int x is private
@@ -125,29 +105,7 @@ public:
 
 int main()
 {
-    Base a = {10};
-    Base b = a;
-    cout << a.getValue()<< "\t" << b.getValue() <<endl;
-    return 0;
-}
-
-#include <iostream>
-using namespace std;
-
-class Base
-{
-    int x;
-public:
-    Base(int x): x(x) {} //we need constructor if int x is private
-    int getValue()
-    {
-        return x;
-    }
-};
-
-int main()
-{
-    Base a = 10;// same as {10},but 10,20 will be error,then int x,int y should be class private
+    Base a = {10};// Base a = 10; same as {10},but 10,20 will be error,then int x,int y should be class private
     Base b = a;
     cout << a.getValue()<< "\t" << b.getValue() <<endl;
     return 0;
