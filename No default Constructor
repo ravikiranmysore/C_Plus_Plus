@@ -1,0 +1,34 @@
+#include <iostream>
+
+using namespace std;
+
+class Base
+{
+    int b_var;
+public:
+    Base() {} // ->> if no default constructor
+    Base(int var)
+    {
+        b_var = var;
+        cout << "Base Init" << endl;
+    }
+};
+class Derived : public Base
+{
+    int d_var;
+public:
+    Derived() {}  // ->> and here
+    Derived(int a, int b) :Base(a), d_var(b)
+    {
+        cout << "Derived Init" << endl;
+    }
+};
+
+
+int main()
+{
+    Derived d(1,20);
+    Derived d2; // this will get error as there is no default constructor 
+    d2 = d;     // in derived class
+    return 0;
+}
