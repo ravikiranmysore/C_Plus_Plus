@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int x;
+public:
+    Base() {cout << "Base called" << endl;}
+}b; //b-> global variable:constructor called first then main
+
+int main()
+{
+   // Base *t1 = (Base *)malloc(sizeof(Base));//just to get size
+    Base *t2 = new Base();// freestore : this is called
+    cout << "Main called"<<endl;
+    return 0;
+}
