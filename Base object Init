@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int x;
+public:
+    //int x;
+    Base(int x): x(x) {}
+    int getValue()
+    {
+        return x;
+    }
+    
+};
+
+int main()
+{
+    //Base a = {10}; // this init list only work when public,if Base a = 10-> error,Use bracket
+    Base a = 10;// works with Base(int x) and int x in private
+    // if 2 parameters Base a = {10,20}-> use brackets
+    Base b = a;
+    cout << a.getValue()<< endl;
+    cout << b.getValue() << endl;
+    return 0;
+}
+
