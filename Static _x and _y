@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    static int _x,_y;
+public:
+    void print()
+    {
+        cout << _x << "\t" << _y << endl;
+    }
+};
+
+int Base::_x = 10;
+int Base::_y = 20;
+
+int main()
+{
+    Base b;
+    b.print();
+    return 0;
+}
