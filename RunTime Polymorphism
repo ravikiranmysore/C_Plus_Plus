@@ -1,0 +1,33 @@
+
+
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    virtual void myFun() // adding virtual will get you "derived fun" as output.
+    {
+        cout << "Base fun"<< endl;
+    }
+};
+class Derived : public Base
+{
+public:
+    void myFun() { cout << "Derived fun" << endl;}
+};
+
+void myFun(Base *b)
+{
+    b->myFun();
+    delete b;
+}
+
+int main()
+{
+    myFun(new Derived);// we are only calling Base,not derived class,RUN TIME POLYMORPHISM
+    myFun(new Base);
+    return 0;
+}
+
+
