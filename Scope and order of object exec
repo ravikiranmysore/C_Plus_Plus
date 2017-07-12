@@ -1,0 +1,48 @@
+/*
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int _x,_y;
+public:
+    Base(int val): _x{_y+1}, _y{val+1}  // first _x will exec then _y
+    {}
+    void print()
+    {
+        cout << _x << "\t" << _y << endl;
+    }
+};
+
+int main()
+{
+    Base b(5);
+    b.print();
+    return 0;
+}
+
+
+*/
+//--------------------------------------
+#include <iostream>
+using namespace std;
+
+int _x = 10;
+class Base
+{
+    int _x,_y;
+public:
+    void print()
+    {
+        cout << _x << "\t" << _y << endl;
+    }
+};
+
+int main()
+{
+    Base b;
+    b.print();
+    return 0;
+}
+
+
