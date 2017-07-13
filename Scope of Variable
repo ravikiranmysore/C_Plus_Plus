@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+namespace myspace {
+
+}
+ int _x = 10;
+int main()
+{
+    int _x = 15;
+    {
+        int _x = 20;
+        cout<< ::_x<< " ";// error _x has not been declared as global variable
+    }
+    cout << _x << endl;
+    return 0;
+}
