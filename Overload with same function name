@@ -1,0 +1,19 @@
+class Base {
+public:
+    char fun()
+    {
+        return 'C';
+    }
+
+    int fun()
+    {
+        return 10;
+    }
+};
+
+int main()
+{
+    Base b;
+    cout << b.fun()<< endl; // you will get error, cause you cant overload with with same name of function and argument
+    return 0;
+}
