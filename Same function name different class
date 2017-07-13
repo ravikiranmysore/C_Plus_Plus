@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+class Base {
+public :
+    virtual void myFun() { cout << "Base" << endl; }
+}base;// base is global variable of Base
+
+class D1 : public Base {
+public:
+    void myFun() { cout << "D1"<< endl; }
+}d1; // d1 is global variable of D1
+
+
+class D2 : public Base {
+public:
+    void myFun() { cout << "D2"<< endl; }
+}d2;
+
+
+Base& interface (int x) {
+    if(x) return d1;
+    else return d2;
+}
+
+int main()
+{
+    Base b;
+
+    d1.myFun();
+    d2.myFun();
+    cout << "\n"<<endl;
+    interface(1).myFun();
+    interface(0).myFun();
+    interface(10).myFun();
+    interface(20).myFun();
+    return 0;
+}
+
+// output: Base Base
+// if virtual added : D1 D2 
+//                    D1 D2 D1 D1
