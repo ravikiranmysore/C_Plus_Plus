@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+class Base {
+public :
+    static void staticFun() {
+        cout << "Base static " << endl;
+        //simpleFun(); //--> error as you cant call nonstatic function
+    }
+   //--> static void simpleFun() {
+    void simpleFun() {
+        cout << "Simple Fun"<< endl;
+    }
+};
+
+Base b;
+Base& eval() { cout << "eval"<< endl; return b; }
+int main()
+{
+    Base b;
+    b.simpleFun();
+    b.staticFun();
+    Base::staticFun();
+    eval().simpleFun();// run time compliation,as eval get output first
+    eval().staticFun();
+    return 0;
+}
+
