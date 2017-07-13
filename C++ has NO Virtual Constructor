@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+class Base {
+public :
+    virtual Base() { cout << "Constructor"<<endl;} // NO virtual constructor in c++,only virtual destructor
+    virtual ~Base() { cout << "Constructor"<<endl;}
+};
+
+int main()
+{
+    Base *b = new Base();
+    delete b;
+    return 0;
+}
+
