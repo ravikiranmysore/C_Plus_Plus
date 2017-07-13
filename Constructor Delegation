@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+class Number {
+    int x,y;
+public :
+    Number():Number(0,0) { cout << 0<< endl<< "\n"; }
+    Number(int a):Number(a,0) { cout << 1<< endl<< "\n"; }
+    Number(int a,int b):x{a},y{b} { cout << 2<< endl; }
+};
+
+int main()
+{
+    Number n1;
+    Number n2 = 10;
+    Number n3 = (10,20);
+    Number N3 = {10,20};
+    return 0;
+}
+//  Number():Number(0,0)-> this is called constructor delegation
+// as it is delegating its constructor to another constructor
+// first -> 2, then--> 0,
+// then -> 2 , then -> 1
+// then -> 2
+/*
+ * when i called Number n3 = (10,20); in the main,
+   NOTE there is "(" not "{", i got the output as 202121,
+   because it took it as Number(int a) , but when i used "{" , then i got 20212.
+*/
