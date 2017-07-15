@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //Plain enum - enum by default is int
+    enum Color1 { red,green,blue };
+     //enum class Color2 { red,green,blue,yellow };//this will cause error
+    // because lik if int a = 10; again int a = 10; wont work
+    // but you can do it using class.
+    //but when enum class Color2 { red,green,blue,yellow }; this will work.
+    Color1 c1 = red;
+
+    switch(c1)
+    {
+    case red : cout << "red" << endl; break;
+    case green : cout << "green" << endl; break;
+    case blue : cout << "blue" << endl; break;
+    }
+
+    //class enum - to differentiate,int to other type comparison
+    enum class Color2 { red,green,blue };
+    Color2 C1 = Color2::red;
+    switch(C1)
+    {
+    case Color2::red : cout << "Class - red" << endl; break;
+    case Color2::green : cout << "Class - green" << endl; break;
+    case Color2::blue : cout << "Class - blue" << endl; break;
+    }
+
+    return 0;
+}
+/* Plain enum : is like int, if you assign red,then its 0
+ * But in Class enum : you have to specify classname::enum
+ * enum class Color2 { red,green,blue };
+ * enum class Color2 { red,green,blue,yellow };
+ * 
+ * if enum Color{ red,blue,green};
+ *    enum People { good,bad };
+ *   if(Color == People)
+ *   ----> this causes error as both enum are diffrerent.
