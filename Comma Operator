@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+int fun()
+{
+    return 111,222,333;//this is assumed as (...)
+}
+
+int main()
+{
+    int v1,v2;
+    v1 = 1,2,3;
+    v2 = (11,22,33);// if ()->33,if not 11
+    cout << v1 << "\n"<<v2<< endl;
+    cout << fun() << endl;
+    return 0;
+}
+//Comma operator executes LHS->RHS, last value is outputted.
