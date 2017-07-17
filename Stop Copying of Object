@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+//1.keep copy constructor and assignment operator as private in your class
+//class Base {
+//    int _x;
+//public:
+//    Base() {}
+//    Base(int x) : _x(x) {}
+//private:
+//    Base(const Base& obj) : _x(obj._x) {}
+//    Base& operator = (const Base& rhs) { _x = rhs._x; return *this;}
+//};
+
+//int main()
+//{
+//    Base b1(10);
+//    Base b1(20);
+//    b1 = b2;
+//    return 0;
+//}
+
+//2.Inherit dummy class with private copy constructor and assignment operator
+//class StopCopy
+//{
+//public:
+//    StopCopy() {}
+//private:
+//private:
+//    StopCopy(const StopCopy& obj) {}
+//    StopCopy& operator = (const StopCopy& rhs) {}
+//};
+
+//class Base : public StopCopy
+//{
+//    int _x;
+//public:
+//    Base() {}
+//    Base(int x) : _x(x) {}
+//};
+
+//int main()
+//{
+//    Base b1(10);
+//    Base b1 = b2;
+//    return 0;
+//}
+
+//3.Delete copy constructor and assignment operator from your class
+class Base
+{
+    int _x;
+public:
+    Base() {}
+    Base(int x) : _x(x) {}
+    Base(const Base& obj) = delete;
+    Base& operator = (const Base& rhs) = delete;
+};
+
+int main()
+{
+    Base b1(10);
+    Base b1 = b2;
+    return 0;
+}
