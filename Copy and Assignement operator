@@ -1,0 +1,70 @@
+
+//void FuncByValue(Foo others); // value semantics->copy
+//void FuncByRef(Foo& others);  // reference sematics
+struct Foo
+{
+    Foo() = default;// if copy constructor,you need default constructor for sure
+    Foo(Foo const& other)
+    {
+        if(other.i != nullptr)
+        {
+            i = new int(*other.i);
+        }
+    }
+
+    //assignment operator
+    Foo& operator = (Foo const& other)
+    {
+        if(other.i != nullptr)
+        {
+            i = new int(*other.i);
+        }
+        return *this;
+    }
+
+
+    // 1st problem: since "new"-> clean up resources,So Destructor
+    ~Foo()
+    {
+        if(i != nullptr)
+        {
+            delete i;
+            i = nullptr;
+        }
+    }
+
+    int *i = nullptr;
+};
+
+
+int main()
+{
+    /* Foo f1;
+   f1.i = new int(42); //heap allocation->expensive
+
+   Foo f2(f1);// same memory access, i.e it is trying to delete i, to dix it make a copy constructor
+  */
+    Foo f1;
+    {
+        Foo f2;
+        f2.i = new int(42);
+        f1 = f2; // this is the assignment operator
+    }
+}
+
+
+/*rvalue ref:
+  1 + 1 = 2
+  lhs = 1 + 1
+  rhs = 2
+  
+  lvalue-> left,rvalue->right - values
+  int i = 42;
+  42; //also complies fine.->but thats rvalue
+  
+  lvalues are permanent values or which has address.
+  rvalues is temporary.
+  2 types: prvalues->pure rvalue
+           xvalue-> eXpiring value
+*/
+   
