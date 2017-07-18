@@ -1,0 +1,32 @@
+
+#include<iostream>
+using namespace std;
+
+struct Values
+{
+    int x;
+    char y;
+    string z;
+};
+
+Values fun(bool flg)
+{
+    if(flg)
+    {
+        return Values{1,'x',"Ravi"};
+    }
+    else
+    {
+        return Values{2,'y',"Kiran"};
+    }
+}
+
+int main()
+{
+    Values v;
+    v = fun(true);
+    cout << v.x << " " << v.y << " " <<v.z<< endl;
+    v = fun(false);
+    cout << v.x << " " << v.y << " " <<v.z<< endl;
+    return 0;
+}
