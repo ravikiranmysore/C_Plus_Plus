@@ -1,0 +1,29 @@
+
+#include<iostream>
+#include<tuple>
+#include<string>
+using namespace std;
+
+std::tuple<int,char,std::string> fun(bool flg)
+{
+    if(flg)
+    {
+        return make_tuple(1,'x',"Ravi");// its "(" not "{"-> error
+    }
+    else
+    {
+        return make_tuple(2,'y',"Kiran");
+    }
+}
+
+int main()
+{
+    int num; char code;string name;
+    tie(num,code,name) = fun(true);
+    cout << num << " " << code << " " << name<< " " << endl;
+
+    tie(num,code,name) = fun(false);
+    cout << num << " " << code << " " << name<< " " << endl;
+
+    return 0;
+}
