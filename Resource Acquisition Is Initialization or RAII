@@ -1,0 +1,103 @@
+
+#include<iostream>
+#include <conio.h>
+
+using namespace std;
+
+class SlaveA
+{
+public:
+    SlaveA()
+    {
+        cout <<"Slave A"<<endl;
+    }
+    ~SlaveA()
+    {
+        cout <<"Destruct Slave A"<<endl;
+    }
+    SlaveA(const SlaveA & source)
+    {
+        cout << "Copy-Construction Slave A"<<endl;
+    }
+};
+class SlaveB
+{
+public:
+    SlaveB()
+    {
+        cout <<"Slave B"<<endl;
+    }
+    ~SlaveB()
+    {
+        cout <<"Destruct Slave B"<<endl;
+    }
+    SlaveB(const SlaveB & source)
+    {
+        cout << "Copy-Construction Slave B"<<endl;
+    }
+};
+class SlaveC
+{
+public:
+    SlaveC()
+    {
+        cout <<"Slave C"<<endl;
+    }
+    ~SlaveC()
+    {
+        cout <<"Destruct Slave C"<<endl;
+    }
+    SlaveC(const SlaveC & source)
+    {
+        cout << "Copy-Construction Slave C"<<endl;
+    }
+};
+
+class Master
+{
+public:
+    Master() = default;
+    Master(int x)
+        : x(x)
+    {
+        cout << "int Param constructor Master"<<endl;
+    }
+    Master(const Master& source)
+        :
+          a(source.a),
+          b(source.b),
+          x(source.x)
+    {
+        cout << "Copy constructor"<< endl;
+    }
+
+    ~Master()
+    {
+        cout <<"Destruct Master"<<endl;
+    }
+
+private:
+    SlaveA a;
+    SlaveB b;// if any of Slave wants to have parameter(int x),then it will cause error
+    SlaveC c;//default ctor for embedded object.
+    int x; // this is not init as special member functions
+};
+
+int main()
+{
+    {
+        Master p;
+        Master m(5);
+        Master n(m);
+        p = n;
+    }
+    while(!_kbhit());
+
+    return 0;
+}
+/* Special Member Functions(Resource Acquisition Is Initialization or RAII)
+1.Default Constructor
+2.Copy COnstructor
+3.Destructor
+4.Copy Assignment Operator
+*/
