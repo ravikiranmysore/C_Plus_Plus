@@ -1,3 +1,4 @@
+// 1. using "const"
 #include <iostream>
 using namespace std;
 
@@ -21,6 +22,8 @@ int main()
     cout << a.getValue()  <<endl;
     return 0;
 }
+--------------------------------------------
+// 2. using "&"
 
 #include <iostream>
 using namespace std;
@@ -46,7 +49,8 @@ int main()
     return 0;
 }
 
-//  c-style structure copying,No default constructor
+--------------------------------------------
+// 2. using c-style structure copying,No default constructor
 #include <iostream>
 using namespace std;
 
@@ -67,6 +71,7 @@ int main()
     cout << a.getValue()  <<endl;
     return 0;
 }
+-----------------------------------------
 
 #include <iostream>
 using namespace std;
@@ -110,3 +115,115 @@ int main()
     cout << a.getValue()<< "\t" << b.getValue() <<endl;
     return 0;
 }
+
+// INIT list 
+#include <iostream>
+using namespace std;
+
+class One
+{
+   int _x;
+public:
+   One(int x) : _x{x} {} //Note:No default constructor.
+};
+
+class Two
+{
+     One a;
+public:
+   Two(One x) : a{x} {} // not a = x; then its error,i,e if removed initilization a{x}
+};
+
+int main()
+{
+    One one(10);
+    Two two(one);
+    return 0;
+}
+
+// Base(a) init
+#include <iostream>
+using namespace std;
+
+class Base
+{
+   int _x;
+public:
+   Base(int x) : _x{x} {}
+};
+
+class Child : public Base
+{
+     int _y;  
+public:
+   Child(int x,int y) : Base{x}, _y{y} { // if you do _x = x; _y = y;  } it will be error 
+};
+
+int main()
+{
+    Child c(1,2);
+    return 0;
+}
+
+//
+ class Base 
+{
+ int x;
+ public:
+ Base(int x) :x{x} {}
+ };
+ 
+int main()
+{
+    Base b(1);
+    return 0;
+}
+
+// init for optimization
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int _x;
+public:
+    Base() { cout << "Base default" << endl; }
+    Base(int x) {_x= x; cout << "Base Parameter constructor"<< endl;}
+    Base(const Base& obj){ this->_x = obj._x; cout<<"Base copy constructor"<<endl; }
+    Base& operator =(const Base& obj) { cout<< "Base assignement operator"<<endl; }
+};
+
+class MyClass {
+    Base _b;
+public:
+    MyClass() { cout << "myclass default"<<endl;}
+    MyClass(Base b) { _b=b; cout << "myclass parameter"<<endl;}
+     //MyClass(Base b) : _b{b} {  cout << "myclass parameter"<<endl;}
+};
+
+int main()
+{
+    Base b(10);
+    MyClass mc(b);
+    return 0;
+}
+
+/*
+  MyClass(Base b) { _b=b; cout << "myclass parameter"<<endl;}
+Base Parameter constructor
+Base copy constructor
+Base default
+Base assignement operator
+myclass parameter
+*/
+
+
+/*
+  MyClass(Base b) : _b{b} {  cout << "myclass parameter"<<endl;}
+Base Parameter constructor
+Base copy constructor
+Base copy constructor
+myclass parameter
+*/
+
+
