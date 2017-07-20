@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+
+bool build()
+{
+    cout << "building first"<<endl;
+    return true;
+}
+
+bool Use() {
+    cout << "here I am Using"<<endl;
+    return true;
+}
+void someFun1(int a) {
+    cout<< a << endl;
+}
+void someFun2(int a, int b) {
+    cout<< a + b<< endl;
+}
+
+int main()
+{
+    someFun1(build() + Use());
+    cout << "***********"<<endl;
+    someFun2(build(),Use());
+}
+
+// there is no rule, its undefined,its Calling Conventions 
