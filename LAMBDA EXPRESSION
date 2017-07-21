@@ -1,0 +1,142 @@
+/*
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+//functor->function  + operator
+struct isOdd
+{
+    bool operator()(int x)
+    {
+        return x % 2;
+    }
+};
+struct isEven
+{
+    bool operator()(int x)
+    {
+        return !(x % 2);
+    }
+};
+int main()
+{
+    vector<int> col {1,2,3,4,5,8,14,9,10,56,78,98,565};
+    
+    size_t c; //unsingned int
+    //c = count_if(col.begin(),col.end(),isOdd());
+     cout<< "Integers that are ODD:"<< c <<endl;
+    c = count_if(col.begin(),col.end(),isEven());
+    cout<< "Integers that are Even:"<< c <<endl;
+    return 0;
+}
+
+to solve the above problem, you can do it simply by using LAMBDA
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+//remove functor and add LAMBDA with functor return,for even or odd
+
+int main()
+{
+    vector<int> col {1,2,3,4,5,8,14,9,10,56,78,98,565};
+    
+    size_t c;
+    c = count_if(col.begin(),col.end(),[](int x) { return (x % 2);});//return value is trype converted into bool
+    cout<< "Integers that are Even:"<< c <<endl;
+    return 0;
+}
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+class isMultipleOF
+{
+    int m_multi;
+public:
+    isMultipleOF(int multi)
+        : m_multi(multi){}
+    bool operator()(int x)
+    {
+        return !(x % m_multi);
+    }
+};
+
+int main()
+{
+    vector<int> col {1,2,3,4,5,8,14,9,10,56,78,98,565};
+    
+    int multi = 3;
+    size_t c;
+    // c = count_if(col.begin(),col.end() , isMultipleOF(multi));
+    // can you something like this or
+    // c = count_if(col.begin(),col.end() , [multi](int x) { return !(x % multi);});
+    c = count_if(col.begin(),col.end() , [=](int x) { return !(x % multi);});
+    cout<< "Integers that are Multiple:"<< c <<endl;
+    return 0;
+}
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+class sumUp
+{
+    int &m_sum;
+public:
+    sumUp(int &sum) : m_sum(sum) {}
+    void operator()(int x)
+    {
+        m_sum += x;
+    }
+};
+
+int main()
+{
+    vector<int> col {1,2,3,4,5,8,14,9,10,56,78,98,565};
+    
+    int sum = 0;
+    //  for_each(col.begin(),col.end() , [sum](int x) { sum += x;});//error coz its copy
+    // for_each(col.begin(),col.end() , [&sum](int x) { sum += x;}); // or
+    //for_each(col.begin(),col.end() , [=](int x) { sum += x;}); // error coz its by value(copy)
+   // for_each(col.begin(),col.end() , [=](int x) mutable { sum += x;}); // wrong: as sum is not 0.
+   
+    //*****************BY default LAMDAs are not mutable**********************\\
+    
+    cout<< "Sum is:"<< sum <<endl;
+    return 0;
+}
+*/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{
+    vector<int> col {1,2,3,4,5,8,14,9,10,56,78,98,565};
+    
+    size_t c;
+    c = count_if(col.begin(),col.end(),
+                 // if more express in lamda, then its best to use "-> bool" return type trail(trailing return type)
+                 //as you cant put it in front
+                 [](int x) -> bool
+    {
+        bool odd = x % 2;
+        cout<< x << "is"<< (odd ? "odd" : "even") << endl;
+        return odd;
+    }
+    );
+    cout<< "Integers that are Even:"<< c <<endl;
+    return 0;
+}
