@@ -1,0 +1,20 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int i = 1;
+    switch(i)
+    {
+    case 1:
+    {  // crosses init error if not { } 
+        int x = 10;
+        cout<< x << endl;
+    } // int is newly assigned and destroyed inside this scope
+        break;
+    default:
+        cout<< "Default"<<endl;
+        break;
+    }
+    return 0;
+}
