@@ -1,0 +1,43 @@
+/*
+ * Virtual Functions---> Inheritance and Polymorphism
+ * Derived class object will be referenced through a base class pointer.
+ * Base class pointer will be used to invoke derived class redefined functions during runtime->
+ * RUN TIME POLYMORPHISM
+*/
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    virtual void myFun() // without virtual you'll get Base class even though you have ref derived.
+    // i,e derived functions get called when added VIRTUAL keyword.
+    {
+        cout << "Base fun"<< endl;
+    }
+};
+class Derived : public Base
+{
+public:
+    void myFun() { cout << "Derived fun" << endl;}// this is overriding
+};
+
+int main()
+{
+//    Derived d;
+//    Base *ptr= &d;//even though we have provided address of derived class,Base call is called.
+//                  //this can be overcomed by VIRTUAL
+//    ptr->myFun();
+
+    Base b;
+    b.myFun();
+    
+    Derived d;
+    d.myFun();
+    
+    Base *ptr = &d;
+    ptr->myFun();//Derived fun if virtual
+
+    return 0;
+}
+
