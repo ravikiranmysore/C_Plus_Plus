@@ -1,0 +1,61 @@
+//without virtual it is called EARLY BINDING,with virtual its called LATE BINDING
+#include <iostream>
+using namespace std;
+
+class Shape
+{
+public :
+    virtual void Draw() // if no virtual then it will call Which Shape thrice
+    {
+        cout << "Which Shape?"<<endl;
+    }
+};
+class Line : public Shape
+{
+public:
+    void Draw()
+    {
+        cout<<"Drawing Line"<< endl;
+    }
+};
+class Circle : public Shape
+{
+public:
+    void Draw()
+    {
+        cout<<"Drawing Circle"<< endl;
+    }
+};
+class Square : public Shape
+{
+public:
+    void Draw()
+    {
+        cout<<"Drawing Square"<< endl;
+    }
+};
+
+
+int main()
+{
+    Line l;Circle c;Square s;
+
+    Shape *ptr = &l;
+    ptr->Draw();
+
+    ptr = &c;
+    ptr->Draw();
+
+    ptr = &s;
+    ptr->Draw();
+
+    return 0;
+}
+
+/* output is :
+ * Drawing Line
+ * Drawing Circle
+ * Drawing Square
+*/ 
+
+
