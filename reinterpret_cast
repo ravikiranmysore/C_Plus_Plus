@@ -1,0 +1,50 @@
+// Reintertret-> read binary fast and effective(Game programming save disk)
+//reinterpret_cast -> reinterpret data into something else
+
+#include<iostream>>
+using namespace std;
+#pragma pack(1)
+struct Cow{
+    int mooCOunt;
+    int legCount;
+    char gender;
+    bool isButched;
+
+};
+int main()
+{
+    Cow cow;
+    cow.mooCOunt = 8;
+    cow.legCount = 5;
+    cow.gender = 'f';
+    cow.isButched = true;
+    cout << sizeof(cow.mooCOunt)<<endl;
+    cout << sizeof(cow.legCount)<<endl;
+    cout << sizeof(cow.gender)<<endl;
+    cout << sizeof(cow.isButched)<<endl;// 10( 4 + 4 + 1 + 1)
+    cout << sizeof(cow)<<endl; // 12 wrong, use praagma pack
+    Cow *cowPtr = &cow;
+
+    cout << cowPtr <<endl; // same address 0x00000
+    //cout << *cowPtr <<endl; // error
+    int * intPrt = reinterpret_cast<int*>(cowPtr);
+    cout << intPrt<<endl; // same address 0x00000
+    cout << &intPrt<< "\t"<< *intPrt<<endl; // 18
+    intPrt++;
+    cout << &intPrt<< "\t"<< *intPrt<<endl;// 5
+    intPrt++;
+    cout << "intPrt : "<<*reinterpret_cast<char*>(intPrt) << endl;
+
+    char *charPtr = reinterpret_cast<char*>(intPrt);
+    cout << &charPtr<<endl; // same address 0x00000
+    cout << *charPtr<<endl;
+    charPtr++;
+
+    cout << *reinterpret_cast<bool*>(charPtr)<<endl;
+    cout << true<< endl;
+    intPrt = intPrt - 2;
+    charPtr--;
+    cout << intPrt <<"\t"<< cowPtr<<endl;
+    return 0;
+
+}
