@@ -1,0 +1,47 @@
+// Reintertret-> read binary fast and effective(Game programming save disk)
+//reinterpret_cast -> reinterpret data into something else
+
+#include<iostream>>
+using namespace std;
+struct Cow{
+    char gender;
+    int legCount;
+    bool isButchered;
+    int dunny;
+    float floty;
+    double dubly;
+};
+int main()
+{
+    Cow cow;
+    cow.legCount = 5;
+    cow.gender = 'f';
+    cow.isButchered = true;
+    cow.dunny = 8;
+    cow.floty = 9.3;
+    cow.dubly = 35.56;
+    Cow *cowPtr = &cow;
+
+    int * charptr = reinterpret_cast<int*>(cowPtr);
+    cout << *reinterpret_cast<char*>(charptr) << endl;
+    charptr++;
+
+    int * intPtr = reinterpret_cast<int*>(charptr);
+    cout << *intPtr<<endl;
+    intPtr++;
+
+    cout << *reinterpret_cast<bool*>(intPtr)<<endl;
+    intPtr++;
+
+    cout << *reinterpret_cast<bool*>(intPtr)<<endl;
+    intPtr++;
+
+   cout << *reinterpret_cast<float*>(intPtr)<<endl;
+   intPtr+=2;
+
+   double *dp = reinterpret_cast<double*>(intPtr);
+   cout << *dp<<endl;
+   // cout << *reinterpret_cast<double*>(intPtr)<<endl;
+    return 0;
+
+}
