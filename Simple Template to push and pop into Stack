@@ -1,0 +1,127 @@
+//Simple Template to push and pop into Stack
+/*
+#include<iostream>
+using namespace  std;
+
+const int MAXNUM = 10;
+
+class Stack
+{
+    int m_top;
+    int m_data[MAXNUM];
+public:
+    Stack()
+        : m_top(-1)
+    {}
+    void push(int value)
+    {
+        if(m_top >= MAXNUM - 1)
+        {
+            throw "overflow";
+        }
+        m_data[++m_top] = value;
+    }
+    
+    void pop()
+    {
+        if(empty())
+        {
+            throw "empty";
+        }
+        --m_top;
+    }
+    
+    int top()
+    {
+        return m_data[m_top];
+    }
+    
+    bool empty()
+    {
+        return m_top < 0;
+    }
+};
+
+
+int main()
+{
+    Stack s;
+    s.push(5);
+    s.push(3);
+    s.push(2);
+    s.push(1);
+    s.push(0);
+    
+    while(!s.empty())
+    {
+        cout<< s.top()<<endl;
+        s.pop();
+    }
+    return 0;
+}
+*/
+#include<iostream>
+using namespace  std;
+
+template<typename T, int MAXNUM>
+class Stack
+{
+    int m_top;
+    T m_data[MAXNUM];
+public:
+    Stack()
+        : m_top(-1)
+    {}
+    void push(T value)
+    {
+        if(m_top >= MAXNUM - 1)
+        {
+            throw "overflow";
+        }
+        m_data[++m_top] = value;
+    }
+    
+    void pop()
+    {
+        if(empty())
+        {
+            throw "empty";
+        }
+        --m_top;
+    }
+    
+    T top()
+    {
+        return m_data[m_top];
+    }
+    
+    bool empty()
+    {
+        return m_top < 0;
+    }
+};
+
+
+int main()
+{
+    //    Stack<int, 5> s; // now you can choose the size and also datatype
+    //    s.push(0);
+    //    s.push(1);
+    //    s.push(2);
+    //    s.push(3);
+    //    s.push(5);
+    
+    Stack<double, 5> s;
+    s.push(0.1);
+    s.push(1.2);
+    s.push(2.3);
+    s.push(3.2);
+    s.push(5.0);
+    
+    while(!s.empty())
+    {
+        cout<< s.top()<<endl;
+        s.pop();
+    }
+    return 0;
+}
