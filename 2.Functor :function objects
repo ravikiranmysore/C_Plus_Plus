@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+
+struct DoSomethingFunctor
+{
+    DoSomethingFunctor(int i,bool b,float f,double d,unsigned int u)
+        :m_i(i)
+        ,m_b(b)
+        ,m_f(f)
+        ,m_d(d)
+        ,m_u(u)
+    {}
+    void operator()(char c) const
+    {
+        //do something
+    }
+    int m_i;
+    bool m_b;
+    float m_f;
+    double m_d;
+    unsigned int m_u;
+
+};
+
+int Add(int x,int y)
+{
+    return x+y;
+}
+
+int main()
+{
+    int i = 1;
+    int j = 2;
+
+    Add(i,3);
+    Add(j,3);
+
+    DoSomethingFunctor o(3,true,3.0f,5.,7u);
+    o('a');
+    o('j');
+    return 0;
+}
