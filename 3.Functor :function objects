@@ -1,0 +1,68 @@
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+struct Dog
+{
+    Dog(int age, int weight)
+        : m_age(age),
+          m_weight(weight)
+    {}
+
+    bool operator<(Dog const& other) const //Note < not ()
+    {
+        return m_age < other.m_age;
+    }
+
+    //this wont work as it has same signature,do one more functor with argument
+//    bool operator<(Dog const& other) const//Note < not ()
+//    {
+//        return m_weight < other.m_weight;
+//    }
+
+    bool operator==(int age) const
+    {
+        return m_age == age;
+    }
+
+    int m_age;
+    int m_weight;
+};
+
+struct SortByWeightFunctor
+{
+    bool operator()(Dog const& lhs,Dog const& rhs) const
+    {
+        return lhs.m_weight < rhs.m_weight;
+    }
+};
+struct FindByWeightFunctor
+{
+    FindByWeightFunctor(int weight)
+        : m_weight(weight)
+    {}
+    bool operator()(Dog const& dog) const
+    {
+        return m_weight < dog.m_weight;
+    }
+    int m_weight;
+};
+
+
+int main()
+{
+    vector<Dog> v = { Dog(3,40),Dog(2,29),Dog(1,23),Dog(4,65)};
+    sort(begin(v),end(v));
+
+    // only way to sort it by using FUNCTOR
+    sort(begin(v),end(v), SortByWeightFunctor());
+
+    //default way of searching
+    find(begin(v),end(v),4); // FIND not FIND_IF
+
+    //funtor with argument
+    find_if(begin(v),end(v),FindByWeightFunctor(65));
+    return 0;
+}
