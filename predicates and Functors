@@ -1,0 +1,48 @@
+/*predicates and Functors
+ * Predicates : Are the callable object which returns bool.
+ * Functors are functions + operator
+ */
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+//predicats : unary
+bool isOdd(int x)
+{
+    return x % 2;
+}
+
+//predicats : Binary
+bool isEqual(int x, int y)
+{
+    return x==y;
+}
+
+//functor is a struct class with operator()->(param,param)
+struct isOddF
+{
+    bool operator()(int x)
+    {
+        return x % 2;
+    }
+};
+
+
+
+int main()
+{
+    cout << isOdd(5)<<endl; // this gives 1 or 0(or noboolalpha)
+    cout << boolalpha<< isOdd(5)<<endl; // this give true or false
+
+    cout << noboolalpha<< isEqual(5,5)<<endl;
+
+    //functor
+    isOddF fn;
+    cout << boolalpha<< fn(5)<<endl;//cant call Functor directly
+    
+    vector<int> col1{1,2,3,4,5,6,7,8,9};
+    cout << "odd value :"<<count_if(col1.begin(),col1.end(), isOddF())<<endl;
+    cout << "odd value without Functor:"<<count_if(col1.begin(),col1.end(), isOdd)<<endl;
+    return 0;
+}
