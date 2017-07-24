@@ -1,0 +1,32 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+template<typename T>
+struct MatchFirstFunctor
+{
+    MatchFirstFunctor(T const& t)
+        : m_t(t) {}
+    
+    template<typename U>
+    bool operator()(U const& pair)
+    {
+        return pair.first == m_t;
+    }
+    T m_t;
+    
+};
+
+int main()
+{
+    vector<pair<int,bool>> v1 = { make_pair(1,true),make_pair(2,false)};
+    vector<pair<bool,float>> v2 = { make_pair(true,1.f),make_pair(false,2.f)};
+    
+    find(begin(v1),end(v1),make_pair(2,true));
+    
+    find_if(begin(v1),end(v1),MatchFirstFunctor<int>(2));
+    find_if(begin(v2),end(v2),MatchFirstFunctor<bool>(true));
+    
+    return 0;
+}
