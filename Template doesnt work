@@ -1,0 +1,120 @@
+/*Template:
+ * Polymorphism
+ *   --> inheretance---subtype,runtime,dynamic polymorphism
+ *     Animal -> Dog
+ *            ->Cat
+ *   --> Template -- generics,compile time polymoorphism,Parametric polymorphism
+ *   -->Overloading -- Ad-hoc(FOR THIS (In Latin))
+ *   -->Casting -- Cortcion polymorphism
+ *
+ * PARAMETRIC POLYMORPHISM-> same implementation->parameter changes
+ *     Ex: Vector<int>;Vector<float> etc-->implementation doesnt change
+ * OVERLOADING POLYMORPHISM -> Diff function,diff argument
+ *     this specific arguments ->special implementation
+ *    ex: SORT, it can sort any 2 arguments
+ */
+#include<iostream>
+#include<cmath>
+#include <type_traits>
+#include <typeinfo>
+using namespace std;
+//#pragma optimize("",off)
+
+//// template->parametric polymorphism
+//template <typename T>
+//bool Equals(T lhs,T rhs)
+//{
+//    return lhs == rhs;
+//}
+
+////template specification
+//template<>
+//bool Equals<float>(float lhs,float rhs)
+//{
+//    //implement something that takes floating point imprecision into account
+//    return true;
+//}
+//// if for double again write it with double,long double etc
+
+
+//tag dispatch
+//template <typename T>
+//bool Equals(T lhs,T rhs)
+//{
+//    //this doesnt work ,Probably for c++14
+//    return Equals(lhs, rhs, typename conditional<is_floating_point<T>::value, true_type ,false_type>::type{}); //DISPATCH
+//}
+//template <typename T>
+//bool Equals(T lhs,T rhs,true_type)     //floating
+//{
+//    //imprecision handling
+//    return true;
+//}
+//template <typename T>
+//bool Equals(T lhs,T rhs,false_type)     //Not floating
+//{
+//   return lhs == rhs;
+//}
+
+
+//SFINAE ->substitution failure is not an error
+template <typename T>
+enable_if_t<!is_floating_point<T>::value,bool> Equals(T lhs, T rhs)
+{
+    return lhs == rhs;
+}
+template <typename T>
+enable_if_t<is_floating_point<T>::value,bool> Equals(T lhs, T rhs)
+{
+    //imprecision
+    return true;
+}
+
+
+//bool Equals(T lhs,T rhs)
+//{
+//    //this doesnt work ,Probably for c++14
+//    return Equals(lhs, rhs, typename conditional<is_floating_point<T>::value, true_type ,false_type>::type{}); //DISPATCH
+//}
+//template <typename T>
+//bool Equals(T lhs,T rhs,true_type)     //floating
+//{
+//    //imprecision handling
+//    return true;
+//}
+
+int main()
+{
+ //    Equals(1,1);
+   //Equals(1,1);
+//    Equals(1.,1.);
+//    Equals(1u,1u);
+//    /* if
+//    * Equals(1.2,1);wrong // then you need template <typename T,typename U> two parameter
+//   */
+//    bool b = Equals(0.42f - 0.4f,0.02f);// this gives false,yo you need tempalte specilization
+
+
+    //tag dispatch
+    Equals(1,1);
+    return 0;
+}
+
+
+
+/* conditional
+#include <iostream>
+#include <type_traits>
+#include <typeinfo>
+
+int main()
+{
+    typedef std::conditional<true, int, double>::type Type1;
+    typedef std::conditional<false, int, double>::type Type2;
+    typedef std::conditional<sizeof(int) >= sizeof(double), int, double>::type Type3;
+
+    std::cout << typeid(Type1).name() << '\n';
+    std::cout << typeid(Type2).name() << '\n';
+    std::cout << typeid(Type3).name() << '\n';
+}
+*/
