@@ -1,0 +1,60 @@
+/*
+ * 1. Virtual inheritance is a C++ technique that ensures only one copy of a base class's member variables are inherited by grandchild derived classes. (wiki)
+ * 2. Without virtual inheritance, if classes A and B both inherit from class X, and class C inherits from classes A and B, then class C will contain two copies of X's member variables: one via A, and one via B. These will be accessible independently, using scope resolution. (wiki)
+ 
+ 
+#include <iostream>
+using namespace std;
+
+class A
+{
+    int arr[10];
+};
+class B : virtual  public A { }; // if virtual(either one) --> 4--> 84
+class C : virtual public A { };// if virtual--> 4--> either A's 40 or B's 4 + 40 -->48
+class D : public B,public C { };
+
+int main(void)
+{
+    cout << sizeof(D)<<endl;// answer is 80-> 4*10(A) + 4 * 10(C),if virtual -> 80 + 4 + 4
+    return 0;
+}
+
+
+
+When we call virtual function from constructor or destructor,
+it call from its own class,
+it means virtual doesn't work when we call it from constructor or destructor. 
+The reason behind this is, when system automatically calls base class constructor before derived constructor we should not call derived class function even if it is virtual,
+because the derived class constructor is not called yet so the data member of that class are not yet created and are not in defined state,
+that is the reason system doesn't call derived class function even if it is virtual.
+ */       
+#include<iostream>
+using namespace std;
+
+class Base {
+public:
+    Base(){  }
+    virtual void fun()
+    {
+        cout << "Base"<<endl;
+    }
+};
+
+class Derived : public Base
+{
+public:
+    Derived(){ fun();/*no fun here*/ }
+    virtual void fun()
+    {
+        cout << "Derived"<<endl;
+    }
+};
+
+
+int main()
+{
+    Base* pBase = new Derived();
+    delete pBase;
+    return 0;
+}
