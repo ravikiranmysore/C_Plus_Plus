@@ -1,0 +1,28 @@
+#include<iostream>
+using namespace std;
+
+class A {
+public:
+    void call() // even if you add virtual it will be B
+    {
+        cout << "A"<<endl;
+    }
+};
+
+class B : public A
+{
+public:
+    void call()
+    {
+        cout << "B"<<endl;
+    }
+};
+
+class C : public B {};
+
+int main()
+{
+    C c;
+    c.call();// answer is B--> as it will call the last stored SAME_NAMED_FUNCTION
+    return 0;
+}
