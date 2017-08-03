@@ -1,0 +1,83 @@
+/*
+#include <iostream>
+using namespace  std;
+
+class Base {
+    int x;
+public:
+    static int stk;
+};
+
+int Base::stk = 0;
+
+int main()
+{
+    cout << sizeof(Base)<< endl; // 4 is the output, HERE STATIC IS NOT TAKEN INTO CONSIDERATION
+}
+
+
+1. Virtual inheritance is a C++ technique that ensures only one copy of a base class's member variables are inherited by grandchild derived classes. (wiki)
+2. Without virtual inheritance,
+if classes A and B both inherit from class X,
+and class C inherits from classes A and B,
+then class C will contain two copies of X's member variables: one via A, and one via B.
+ These will be accessible independently, using scope resolution. (wiki)
+
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    Base()
+    {
+        cout << "Constructor called" << endl;
+    }
+};
+
+typedef Base* Pointer;
+
+int main()
+{
+    Base* t1,t2; // constructor is called as it take Base *t1->Empty, and Base t2->constructor
+    Pointer t11,t22;
+}
+*/
+#include <iostream>
+using namespace std;
+
+class BaseA
+{
+private:
+    int i;
+public:
+    BaseA(int ii = 0 ) : i(ii) {} //conversion costructor
+    void show() {
+        cout << "i:" << i<< endl;
+    }
+};
+
+class BaseB
+{
+private:
+    int x;
+public:
+    BaseB(int xx ) : x(xx) {}
+    operator BaseA() const    //conversion operator-> BaseA = BaseB(you need conversion operator)
+     {
+         return BaseA(x);
+     }
+};
+
+void fun(BaseA a)
+{
+    a.show();
+}
+
+int main()
+{
+    BaseB b(10);
+    fun(b);// -> BaseA = BaseB;->operator
+    fun(20);
+    return 0;
+}
