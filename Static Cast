@@ -1,0 +1,29 @@
+
+// static means compile time-> static cast can convert object from one type to another
+#include<iostream>
+#include<cstdlib>
+using namespace std;
+
+class Base{};
+class Derived1 : public Base {};
+class Derived2 : public Base {};
+
+int main()
+{
+    Base* b = new Derived1();
+    //Derived1* d1 = b;// this is not safe-> initializing cannot convert from Base to Der1
+    Derived1* d1 = static_cast<Derived1*>(b);
+    Derived2* d2 = static_cast<Derived2*>(b);
+
+    int i = 25;
+    //  Sqrt(i);//identifer not fount
+    double d = sqrt(static_cast<double>(i));
+    cout << d << endl;
+    
+    int i = 9; 
+    float f = static_cast<float>(i);//type conversion need to be defined
+    dog d1 = static_cast<dog>(string("Bob"));
+    dog* pd = static_cast<dog*>(new yellowdog());//convert pointer/ref from one type to related type(down/up cast)
+
+    return 0;
+}
