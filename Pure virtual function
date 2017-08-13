@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+class A {
+public:
+    virtual void show(int ) = 0; //abstract
+};
+
+class B : public A
+{
+    int _x;
+    void show(int ) {} //abstract
+    void show() { cout << "Show" <<endl;}
+};
+
+int main()
+{
+    // B b; // this will be error as show() signature is not same.
+    B *b; // this is valid,this is not object, but its a pointer
+    return 0;
+}
