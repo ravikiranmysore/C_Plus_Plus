@@ -1,0 +1,41 @@
+/*
+The const in the end means the function is constant, so it doesn't change the object's state.
+
+When you put the const in the end, you can't change the state of the object's members.
+
+Declaring a function static means it doesn't belong to the object at all, it belongs to the class type.
+
+Putting const in the beginning means the return type value is a constant.
+Static functions work without an instance, whereas const guarantees that the function will not change the instance (even though it requires an instance).
+
+static can access static member , where are const is used because it is guarantee that function wont change its objects
+*/
+
+#include<iostream>
+using namespace std;
+
+class Base
+{
+	static int x;
+public:
+	  static int getX() 
+	{
+		return x;
+	}
+	static void setX(int val)
+	{
+		x = val;
+	}
+};
+
+int Base::x = 10;
+
+
+int main()
+{
+	Base::setX(20);
+	cout << Base::getX() << endl;
+
+	getchar();
+	return 0;
+}
