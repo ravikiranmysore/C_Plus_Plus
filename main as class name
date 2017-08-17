@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+
+class main
+{
+public :
+    main(const char* str)
+    {
+        cout << sizeof(str)<<endl; // 8
+        int strLen = *str;
+        cout << strLen<<endl;  // 84
+        while(strLen --> 0)
+        {
+            cout << str[strLen];
+        }
+    }
+};
+
+class A {
+public :
+    void Print()
+    {
+        cout << "A" << endl;
+    }
+};
+class B {
+public:
+    void Print()
+    {
+        cout << "B" << endl;
+    }
+};
+class C {
+public:
+    void Print()
+    {
+        cout << "C" << endl;
+    }
+};
+
+
+int main()
+{
+    class main b("Testsomethinghere\t");
+    cout<< "\n"<<endl;
+
+    A A;
+    B B;
+    C C;
+
+    A.Print();
+    B.Print();
+    C.Print();
+
+    return 0;
+}
