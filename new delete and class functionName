@@ -1,0 +1,25 @@
+
+#include<iostream>
+using namespace std;
+
+class Base
+{
+	int _x;
+public:
+	Base() { cout << "Base constructor" << endl; }
+	Base(int x) : _x{ x } { cout << "Base x" << endl; }
+	~Base() { cout << "Base De-constructor" << endl; }
+};
+
+int main()
+{
+	cout << new Base()<<endl;
+	delete new Base();
+
+	Base b1(10);
+	Base b2();//this is like -> Base functionName(void);
+
+	getchar();
+	return 0;
+}
+
