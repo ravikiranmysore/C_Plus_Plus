@@ -1,4 +1,4 @@
-// Reintertret-> read binary fast and effective(Game programming save disk)
+// reinterpret-> read binary fast and effective(Game programming save disk)
 //reinterpret_cast -> reinterpret data into something else
 
 #include<iostream>>
