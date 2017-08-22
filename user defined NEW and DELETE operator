@@ -1,0 +1,42 @@
+
+#include<iostream>
+using namespace std;
+
+class Test
+{
+public:
+	Test() { cout << "Constructor called" << endl; }
+
+	~Test() { cout << "Deconstructor called " << endl; }
+
+	void* operator new(size_t size)
+	{
+		cout << "New fun called" << endl;
+		void* storage = malloc(size);
+		return storage;
+	}
+
+	void operator delete(void* p)
+	{
+		cout << "Delete fun called" << endl;
+		free(p);
+	}
+};
+
+int main()
+{
+	Test *m = new Test();
+	delete m;
+
+	getchar();
+	return 0;
+}
+
+// output
+/*
+New fun called
+Constructor called
+Deconstructor called
+Delete fun called
+*/
+
