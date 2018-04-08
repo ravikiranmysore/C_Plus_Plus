@@ -5,10 +5,18 @@ using namespace std;
 
 int main()
 {
-    int * p1 = NULL;
+    int * p1 = NULL; --> this is pointing to stack for example, and you cannot access it, so segmentation fault.
     * p1 = 10;
 
     cout <<  *p1 << endl;
 
   return 0;
 }
+
+/*
+int main()
+{
+main(); ----> this causes error -> its due to stack overflow.
+  return 0;
+}
+*/
