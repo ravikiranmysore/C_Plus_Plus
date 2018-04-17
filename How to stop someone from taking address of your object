@@ -1,0 +1,28 @@
+/* How to stop someone from taking address of your object
+ * 1. Overload & operator and keep it private
+ * 2.Delete & operator from your class
+*/
+#include <iostream>
+using namespace std;
+
+class Base
+{
+    int x;
+public:
+   Base() {}
+   Base(int x) : x{x} {}
+//   Base* operator & () {
+//       cout << "This is THIS"<< endl;
+//       return this;
+//   }
+   Base* operator & () = delete;
+};
+
+int main()
+{
+  Base b;
+//  Base *bp = &b; if "&" then it wont compile
+//  cout << bp << endl;
+//  cout << &b << endl;
+    return 0;
+}
