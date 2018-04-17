@@ -1,0 +1,44 @@
+// Fuction overloading and Function Overriding
+
+#include<iostream>
+using namespace std;
+
+void print(int i)
+{
+    cout << "i : " << i << endl;
+}
+void print(int i,int j) // this is overloading
+{
+    cout << "i,j : " << i << j << endl;
+}
+
+//function overriding
+class Base
+{
+public:
+    void print2()
+    {
+        cout << "Base"<< endl;
+    }
+};
+class Derived : public Base
+{
+public:
+    void print2()
+    {
+        cout << "Derived"<< endl;
+    }
+};
+
+int main()
+{
+    print(1);
+    print(1,2);// this is overloading,same function with extra load
+
+
+    Base b;
+    Derived d;
+    b.print2();
+    d.print2(); // this is overriding
+    return 0;
+}
