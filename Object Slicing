@@ -1,0 +1,34 @@
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public :
+    int b_var;
+    Base() { cout << "Base Constructor"<< endl;}
+    ~Base() { cout << "Base Destructor "<< endl;}
+};
+class Derived : public Base {
+public :
+    int d_var;
+    Derived() { cout << "Derived Constructor"<< endl;}
+    ~Derived() { cout << "Derived DeConstructor"<< endl;}
+};
+
+int main()
+{
+    Derived d_obj;
+    Base b_obj = d_obj;
+    return 0;
+}
+
+/*
+d_obj = Base Constructor
+        Derived Constructor
+
+        Base Destructor
+        Derived DeConstructor
+
+ b_obj = d_obj;
+        Base Destructor --> here derived deconstructor is not called,its sliced
+*/
