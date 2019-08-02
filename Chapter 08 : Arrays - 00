@@ -1,0 +1,277 @@
+/*
+Arrays are elements of the same type placed in adjoining memory locations. The elements can be individually
+referenced by a unique identifier with an added index.
+
+#################################################################
+
+01. Array initialization :
+----------------------
+1.int arrayOfInts[5];
+2.int arrayOfInts[5] = {10, 20, 30, 40, 50};
+3.int arrayOfInts[] = {10, 20, 30, 40, 50};
+4.int arrayOfInts[5] = {10,20}; // means 10, 20, 0, 0, 0
+5.int n = 10; int arr2[n]; 
+
+#################################################################
+
+02Accessing the values of an array :
+------------------------------------------
+The values of any of the elements in an array can be accessed just like the value of a regular variable of the same type.
+-----------------------------------------
+int foo [] = {16, 2, 77, 40, 12071};
+int n, result=0;
+
+int main ()
+{
+  for ( n=0 ; n<5 ; ++n )
+  {
+    result += foo[n];
+  }
+  cout << result;
+------------------------------------------
+#################################################################
+
+03.Multidimensional arrays:
+---------------------------
+   int a[3][4] = {  
+   {0, 1, 2, 3} ,  
+   {4, 5, 6, 7} ,   
+   {8, 9, 10, 11}   
+   };
+-----------------------  
+Accessing : int val = a[2][3];
+-----------------------  
+Multidimensional arrays can be described as "arrays of arrays".
+------------------------------------------
+  for (n=0; n<HEIGHT; n++)
+    for (m=0; m<WIDTH; m++)
+    {
+      jimmy[n][m]=(n+1)*(m+1);
+    }
+------------------------------------------
+#################################################################
+
+
+04. Arrays as parameters
+----------------------------
+At some point, we may need to pass an array to a function as a parameter. In C++,
+it is not possible to pass the entire block of memory represented by an array to a function directly as an argument.
+But what can be passed instead is its address. In practice, this has almost the same effect,
+and it is a much faster and more efficient operation.
+------------------------------------------
+// arrays as parameters
+#include <iostream>
+using namespace std;
+
+void printarray (int arg[], int length) {
+  for (int n=0; n<length; ++n)
+    cout << arg[n] << ' ';
+  cout << '\n';
+}
+
+int main ()
+{
+  int firstarray[] = {5, 10, 15};
+  int secondarray[] = {2, 4, 6, 8, 10};
+  printarray (firstarray,3);
+  printarray (secondarray,5);
+}
+------------------------------------------
+
+
+
+
+*/
+
+// A fixed size raw array matrix (that is, a 2D raw array).
+// Asking for size of array, taking inputs, and displaying.
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+auto main() -> int   //  trailing return type, introduced in C++11.No need of "return 0"
+{
+    int n_rows=5;
+    int n_cols=5;
+    int m[n_rows][n_cols];
+
+    cout << " Enter width and height" << endl;
+    cin>>n_rows>>n_cols;
+
+    cout << " input numbers : " << endl;
+    for(int i=0; i<n_rows; i++)
+    {
+        for (int j=0; j<n_cols; j++)
+        {
+            cin>>m[i][j];
+        }
+    }
+
+    for( int y = 0; y < n_rows; ++y )
+    {
+        for( int x = 0; x < n_cols; ++x )
+        {
+            cout << setw(5) << m[y][x]; // Note: do NOT use m[y,x]! , std::setw -> Sets the field width to be used on output operations.
+        }
+        cout << '\n';
+    }
+}
+
+
+//A 2D array is basically a 1D array of pointers, where every pointer is pointing to a 1D array, which will hold the actual data.
+
+//Here N is row and M is column.
+
+//dynamic allocation :
+//    --------------------
+//    int** ary = new int*[N];
+//for(int i = 0; i < N; i++)
+//ary[i] = new int[M];
+
+//fill :
+//------
+//for(int i = 0; i < N; i++)
+//for(int j = 0; j < M; j++)
+//ary[i][j] = i;
+
+//print :
+//-------
+//for(int i = 0; i < N; i++)
+//for(int j = 0; j < M; j++)
+//std::cout << ary[i][j] << "\n";
+
+//free :
+//------
+//for(int i = 0; i < N; i++)
+//delete [] ary[i];
+//delete [] ary;
+
+---------------------------------------------------------
+
+
+// Dynamically Allocated input, and output 2-D Arrays in C++
+
+/*int *ary = new int[sizeX*sizeY];
+  ary[i*sizeY+j]; //ary[i][j] is then rewritten as
+*/
+
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+auto main() -> int
+{
+
+    int row, col;
+    cout << "Please enter the rows and col size: " << endl;
+    cin >> row >> col;
+
+    int** map = new int*[row];
+    for (int ii = 0; ii < row; ++ii)
+        map[ii] = new int[col];
+
+    //for reading input ...
+    cout << "Please enter the number as matrix : " << endl;
+
+    for (int ii = 0; ii < row; ii++)
+    {
+        for (int jj = 0; jj < col; jj++)
+        {
+            cin >> map[ii][jj];
+        }
+    }
+    cout << endl;
+
+    //Printing
+    for (int ii = 0; ii < row; ii++) {
+        for (int jj = 0; jj < col; jj++) {
+            cout << map[ii][jj] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+    // clearing heap memory
+    for (int ii = 0; ii < row; ++ii) {
+        delete[] map[ii];
+    }
+    delete[] map;
+}
+
+
+//SORTING ARRAY
+//// Example of raw dynamic size array. It's generally better to use std::vector.
+
+//#include <algorithm> // std::sort
+//#include <iostream>
+//using namespace std;
+
+//auto int_from( istream& in ) -> int
+//{
+//    int x;
+//    in >> x;
+//    return x;
+//}
+
+//auto main() -> int
+//{
+//    cout << "Sorting n integers provided by you : \n";
+
+//    int const n = int_from( cin );
+//    int* a = new int[n]; // ← Allocation of array of n items.
+//    for( int i = 1; i <= n; ++i )
+//    {
+//        cout << "The #" << i << " number, please: " ;
+//        a[i-1] = int_from( cin );
+//    }
+
+//    sort( a, a + n ); // SORT ALGORITHM
+
+//    cout << "\nSorted numbers are : " << endl;
+//    for( int i = 0; i < n; ++i )
+//    {
+//        cout << a[i] << ' ';
+//    }
+//    cout << "\n"<<endl;
+//    delete[] a;
+//}
+
+
+//Expanding dynamic size array by using std::vector -
+//Example of std::vector as an expanding dynamic size array.
+
+#include <algorithm> // std::sort
+#include <iostream>
+#include <vector> // std::vector
+using namespace std;
+
+int int_from( std::istream& in )
+{
+    int x = 0;
+    in >> x;
+    return x;
+}
+
+int main()
+{
+    cout << "Sorting integers provided by you.\n";
+    cout << "You can indicate EOF via F6 in Windows or Ctrl+D in Unix-land. \n";
+    vector<int> a; // ← Zero size by default.
+    while( cin )
+    {
+        cout << "One number, please, or indicate EOF: ";
+        int const x = int_from( cin );
+        if( !cin.fail() ) { a.push_back( x ); } // Expands as necessary.
+    }
+    sort( a.begin(), a.end() );
+
+
+    int const n = a.size();
+    for( int i = 0; i < n; ++i ) { cout << a[i] << ' '; }
+    cout << '\n';
+}
+
+
+
