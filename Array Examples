@@ -2,37 +2,55 @@
  * Player enters a series of items that they have and the program stores them in the list
  *
 */
-#include<iostream>
-#include<vector>
-using namespace std;
+//#include<iostream>
+//#include<vector>
+//using namespace std;
 
-int main()
-{
-    vector<int> myvector;
-    int myint;
-    int count;
+//int main()
+//{
+//    vector<int> myvector;
+//    int myint;
+//    int count;
+//    int del;
 
-    cout << "Please enter number of digit you would like to enter:\n";
-    cin >> count;
+//    cout << "Please enter number of digit you would like to enter:\n";
+//    cin >> count;
 
-    cout << "Please enter digits, followed by Enter:\n";
-    for(int i = 0; i < count; i++)
-    {
-        cin >> myint;
-        myvector.push_back(myint);
-    }
-    cout << "Your entered numbers are : " <<endl;
-    for(int j = 0; j < myvector.size(); j++)
-    {
-        cout << myvector[j]<< "\t";
-    }
-    cout << endl;
+//    cout << "Please enter digits, followed by Enter:\n";
+//    for(int i = 0; i < count; i++)
+//    {
+//        cin >> myint;
+//        myvector.push_back(myint);
+//    }
+//    cout << "Your entered numbers are : " <<endl;
+//    for(int j = 0; j < myvector.size(); j++)
+//    {
+//        cout << myvector[j]<< "\t";
+//    }
+//    cout << endl;
 
-    return 0;
-}
 
-/* Player enters a series of items dynamically(ends with 0), then size and items are displayed.
+//    cout << "How many elements do you wish to keep:\n";
+//    cin >> del;
 
+//    for(int i = del ; i <  count; i++)
+//    {
+//        myvector.pop_back();
+//        cout << "Deleted items are #: " << myvector[i] << "\n";
+//    }
+
+//     cout << "\nNow, remaining elements are :\n";
+//    for(int j = 0; j < myvector.size(); j++)
+//    {
+//        cout << myvector[j]<< "\t";
+//    }
+//    cout << endl;
+
+//    return 0;
+//}
+
+
+//Player enters a series of items dynamically(ends with 0), then size and items are displayed.
 
 #include <iostream>
 #include <vector>
@@ -42,6 +60,7 @@ int main ()
 {
     vector<int> myvector;
     int myint;
+    int exit_code = 0;
 
     cout << "Please enter some integers (enter '0' to end):\n";
 
@@ -49,7 +68,9 @@ int main ()
     {
       cin >> myint;
       myvector.push_back(myint);
-    } while (myint);
+      if(myint == exit_code)
+          myvector.pop_back();
+    } while (myint );
 
     cout << "Item stored : " << myvector.size() << " numbers.\n";
 
@@ -61,4 +82,4 @@ int main ()
     cout << endl;
     return 0;
 }
-*/
+
