@@ -1,0 +1,112 @@
+
+//Exception Handling in C++
+
+//One of the advantages of C++ over C is Exception Handling.
+//Exceptions are run-time anomalies or abnormal conditions that a program encounters during its execution.
+//There are two types of exceptions:
+//    a)Synchronous,
+//    b)Asynchronous(Ex:which are beyond the program’s control, Disc failure etc).
+//try: represents a block of code that can throw an exception.
+
+//catch: represents a block of code that is executed when a particular exception is thrown.
+
+//throw: Used to throw an exception. Also used to list the exceptions that a function throws, but doesn’t handle itself.
+       
+//When an exception is thrown, all objects created inside the enclosing try block are destructed before the control is transferred to catch block.
+
+
+#include <iostream>
+
+using namespace std;
+
+class Test {
+public:
+    Test() { cout << "Constructor of Test " << endl; }
+    ~Test() { cout << "Destructor of Test "  << endl; }
+};
+
+void doSomeThing()
+{
+    bool check = false;
+    bool check2 = true;
+    bool check3 = true;
+    if(check)
+    {
+        throw "8";
+    }
+    //    if(check2)
+    //    {
+    //        throw "Something went wrong";
+    //    }
+    if(check3)
+    {
+        throw string("Something went really wrong");
+    }
+}
+void useMightGone()
+{
+    doSomeThing();
+}
+
+int main()
+{
+
+    try
+    {
+        useMightGone();
+    }
+    catch(int e)
+    {
+        cout << e << endl;
+    }
+    catch(char const* e)
+    {
+        cout << "Error Message : "<< e << endl;
+    }
+    catch(string &s)
+    {
+        cout << "String error Message : " << s << endl;
+    }
+
+    try  {
+        throw 10;
+    }
+    catch (...)
+    {
+        cout << "Default Exception\n";
+    }
+
+
+
+    cout << "Main loop is still running ..."<< endl;
+
+
+    int x = -1;
+
+    // Some code
+    cout << "Before try \n";
+    try {
+        cout << "Inside try \n";
+        if (x < 0)
+        {
+            throw x;
+            cout << "After throw (Never executed) \n";
+        }
+    }
+    catch (int x ) {
+        cout << "Exception Caught \n";
+    }
+
+
+    cout << "After catch (Will be executed) \n";
+
+    try {
+        Test t1;
+        throw 10;
+    } catch(int i) {
+        cout << "Caught " << i << endl;
+    }
+
+
+    return 0;
+}
