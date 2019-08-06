@@ -1,0 +1,197 @@
+// STANDARD EXPECTION
+//#include <iostream>
+
+//using namespace std;
+
+//class Test {
+//public:
+//    Test()
+//    {
+//        char *p = new char[9999999999999999];// has to be long size
+//        delete[] p;
+//    }
+
+//};
+
+//int main()
+//{
+
+//    try
+//    {
+//      Test wrong;
+//    }
+//    catch(bad_alloc e)
+//    {
+//        cout << "Caught execption : "<< e.what()<< endl;
+//    }
+//   cout << "Still running .. "<<endl;
+
+//    return 0;
+//}
+
+//*********custom exceptions***********
+// User-defined Custom Exception with class in C++
+//We can use Exception handling with class too.
+//Even we can throw an exception of user defined class types
+#include <iostream>
+#include <exception>
+#include <stdexcept>
+using namespace std;
+
+class Myexception : public exception
+{
+public:
+    virtual const char* what() const throw()
+    {
+        return "something went wrong";
+    }
+};
+
+class Test
+{
+public:
+    void SomethingWrong()
+    // --> throw(bad_alloc) --> will give compile time error
+    {
+        throw Myexception();
+    }
+
+};
+
+class demo {
+    int num;
+
+public:
+    demo(int x)
+    {
+        try {
+
+            if (x == 0)
+                // catch block would be called
+                throw "Zero not allowed ";
+
+            num = x;
+            show();
+        }
+
+        catch (const char* exp) {
+            cout << "Exception caught \n ";
+            cout << exp << endl;
+        }
+    }
+
+    void show()
+    {
+        cout << "Num = " << num << endl;
+    }
+};
+
+
+class Exception : public runtime_error {
+public:
+    // Defining constructor of class Exception
+    // that passes a string message to the runtime_error class
+    Exception()
+        : runtime_error("Math error: Attempted to divide by Zero\n")
+    {
+    }
+};
+
+// defining Division function
+float Division(float num, float den)
+{
+
+    // If denominator is Zero
+    // throw user defined exception of type Exception
+    if (den == 0)
+        throw Exception();
+
+    // otherwise return the result of division
+    return (num / den);
+
+} // end Division
+
+int main()
+{
+    Test test;
+    try
+    {
+        test.SomethingWrong();
+    }
+    catch (Myexception &s)
+    {
+        cout << "Error :  " << s.what() << endl;
+    }
+
+    demo(0);
+    cout << "Again creating object \n";
+    demo(1);
+
+
+    float numerator, denominator, result;
+    numerator = 12.5;
+    denominator = 0;
+
+    // try block calls the Division function
+    try {
+        result = Division(numerator, denominator);
+
+        // this will not print in this example
+        cout << "The quotient is " << result << endl;
+    }
+
+    // catch block catches exception if any
+    // of type Exception
+    catch (Exception& e) {
+
+        // prints that exception has occurred
+        // calls the what function using object of
+        // the user defined class called Exception
+        cout << "Exception occurred" << endl
+             << e.what();
+    }
+
+    return 0;
+}
+
+
+//Catching base and derived classes as exceptions
+
+//Exception Handling – catching base and derived classes as exceptions:
+
+//If both base and derived classes are caught as exceptions then catch block of derived class must appear before the base class.
+
+//If we put base class first then the derived class catch block will never be reached. 
+//For example, following C++ code prints “Caught Base Exception”
+
+
+#include<iostream>
+using namespace std;
+
+class Base {};
+class Derived: public Base {};
+int main()
+{
+    Derived d;
+    // some other stuff
+    try {
+        // Some monitored code
+        throw d;
+    }
+//    catch(Base b) {
+//        cout<<"Caught Base Exception";
+//    }
+//    catch(Derived d) {  //*******This catch block is NEVER executed******
+//        cout<<"Caught Derived Exception";
+//    }
+
+    catch(Derived d) {
+        cout<<"Caught Derived Exception";
+    }
+    catch(Base b) {
+        cout<<"Caught Base Exception";
+    }
+    getchar();
+    return 0;
+}
+
