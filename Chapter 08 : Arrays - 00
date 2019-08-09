@@ -1,6 +1,11 @@
 /*
 Arrays are elements of the same type placed in adjoining memory locations. The elements can be individually
 referenced by a unique identifier with an added index.
+   Arrays: collection of similar type of data.
+    // If you go out of bounds --> garbage value, Limitation of array.
+    // const double days[5]{100,5,1,5,58};
+    //int aarr[]{1,2,3,4}; size is determined from elements of array.
+    // Name of the array is the location of the array[sizeof(arr)/sizeof(int)] i = 20 ;-> 80(20*4) / 4 = 20
 
 #################################################################
 
@@ -11,6 +16,24 @@ referenced by a unique identifier with an added index.
 3.int arrayOfInts[] = {10, 20, 30, 40, 50};
 4.int arrayOfInts[5] = {10,20}; // means 10, 20, 0, 0, 0
 5.int n = 10; int arr2[n]; 
+
+   1.	int foo [5]; // garbage value of 5
+	2.  int foo [5] = { 16, 2, 77, 40, 12071 };  // values of 5
+	3.  int bar [5] = { 10, 20, 30 };  // 0,0 at end.
+	4.  int arr[20] {}; // all 0's
+	5.  int arr[20] {1,2,3,4}; // 1,2,3,4 rest is 0's
+	6.  int foo[] = { 10, 20, 30 }; or int foo[] { 10, 20, 30 };
+   *7.  // WONT WORK, 
+		int arry[0] = 100; 
+		int arr1[5] = 100;
+		int arr2[0]{100};// Wont work, 
+		 but int arr2[1]{100}; works
+		
+		// Works 
+		int arry[0] = {};  
+		int arry[10] = {}; 
+		int arr2[1]{ 100 }; 
+		int arr2[10]{ 100 };
 
 #################################################################
 
