@@ -30,6 +30,27 @@ int main(){
     }
     while(number != 0.0);
     cout<<"Total sum = "<<sum;
+    
+    char selection;
+    cin >> selection;
+    switch(selection)
+    {
+    case 1:
+        cout << "sleect it";
+        break;
+    default:
+        cout<<"nothing macha";
+    }
+
+    while(true)
+    {
+        char alwaysTrue;
+        cout << "Do you want to loop again ? (Y/N) : ";
+        cin >> alwaysTrue;
+
+        if(alwaysTrue == 'N' || alwaysTrue == 'n')
+            break;
+    }
 
     return 0;
 }
