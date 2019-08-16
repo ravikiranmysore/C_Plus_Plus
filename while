@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+    bool done = false;
+    int num = 0;
+
+    while(!done)
+    {
+        cout << "Enter the int between 1 and 5 : ";
+        cin >> num;
+        if(num <= 1 || num >= 5)
+        {
+            cout << "Out of range\n";
+        }
+        else
+        {
+            cout << "Thanks"<<endl;
+            done = true;
+        }
+    }
+
+    float number, sum = 0.0;
+
+    do {
+        cout<<"keep entering a number: ";
+        cin>>number;
+        sum += number;
+    }
+    while(number != 0.0);
+    cout<<"Total sum = "<<sum;
+
+    return 0;
+}
