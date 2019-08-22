@@ -51,6 +51,27 @@ int main(){
         if(alwaysTrue == 'N' || alwaysTrue == 'n')
             break;
     }
+    
+       string ss;
+    int num;
+    cin >> num;
+
+    while(num) {
+        cin >> ss;
+        int i = 0;
+        for(i; i <= ss.size(); i++) {
+            if(i % 2 != 0)
+                cout << ss[i - 1];
+        }
+
+        cout << "\t";
+        for(i = 1; i <= ss.size(); i++) {
+            if(i % 2 == 0)
+                cout << ss[i - 1];
+        }
+        num--;
+        cout << endl;
+    }
 
     return 0;
 }
