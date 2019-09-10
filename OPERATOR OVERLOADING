@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+
+struct Vec2
+{
+public:
+	float x;
+	float y;
+
+	Vec2(float x, float y) : x{ x }, y{ y } {}
+
+	Vec2 operator+(const Vec2& others)
+	{
+		return { x + others.x, y + others.y }; // NOTE : {} is the initializer for the return value. 
+	}
+
+	Vec2 operator*(const Vec2& others)
+	{
+		return Vec2(x * others.x, y * others.y); // ( )
+	}
+
+	void operator+=(Vec2 p) // this is only opertor
+	{
+		x += p.x;
+		y += p.y;
+	}
+	Vec2 operator*=(const Vec2& others)
+	{
+		return Vec2(x += others.x, y += others.y);
+	}
+};
+
+ostream& operator<<(ostream& stream, const Vec2 others)
+{
+	stream << others.x << " ; " << others.y;
+	return stream;
+}
+
+int main()
+{
+	Vec2 point1{ 4.6, 8.9 };
+	Vec2 point2{ 1.2, 3.4 };
+	Vec2 point3 = point1 + point2;
+	cout << point3 << endl;
+	point3 += {4.5, 3.3};
+	cout << point3 << endl;
+
+	cout << "------------------" << endl;
+
+	Vec2 p1(4.6, 8.9);
+	Vec2 p2(1.2, 3.4);
+	Vec2 p3 = p1 + p2;
+	cout << p3 << endl;
+	p3 *= {4.5, 3.3};
+	cout << p3 << endl;
+
+	return 0;
+}
