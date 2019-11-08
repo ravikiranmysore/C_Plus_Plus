@@ -1,0 +1,67 @@
+class Move 
+{
+private: 
+    int *data;
+public:
+    int set_val_data(int d)
+    {
+        *data = d;
+    }
+    int get_val_data()
+    {
+        return *data;
+    }
+    //constructor
+    Move(int d);
+    //copy constructor
+    Move(const Move &source);
+    //move
+    Move(Move &&source) noexcept;
+    //Destructor
+    ~Move();
+};
+
+Move::Move(int d)
+{
+    data = new int;
+    *data = d;
+    cout << "This is constructor : "<< d << endl;
+}
+
+Move::Move(const Move &source) : Move{*source.data}
+{
+    cout << "Copy constructor :  "<< *data << endl;
+}
+
+Move::Move(Move &&source) noexcept
+    : data{source.data}
+{
+    source.data = nullptr;
+    cout << "Move constructor - moving resources : " << *data << endl;
+}
+
+int count = 0;
+Move::~Move()
+{
+    if(data != nullptr)
+    {
+        cout << "\nDestructor freeing data : "<< *data << endl;
+    }
+    else
+    {
+        cout << "Destructor freeing data for nullptr : " << count <<endl;
+        count++;
+    }
+    delete data;
+}
+
+int main()
+{
+    vector<Move> vec;
+    
+    vec.push_back(Move{10});
+    vec.push_back(Move{20});
+    vec.push_back(Move{30});
+    vec.push_back(Move{40});
+    return 0;
+}
