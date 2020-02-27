@@ -1,0 +1,108 @@
+#include <iostream>
+using namespace std;
+
+int fact(int n)
+{
+    if(n == 0) return 1;
+
+    int ans = fact(n -1) * n;
+    return ans;
+}
+
+void incPrint(int n)
+{
+    if(n == 0) {
+        return;
+    }
+    incPrint(n - 1);
+    cout << n << " ";
+}
+
+void decPrint(int n)
+{
+    if(n == 0) {
+        return;
+    }
+    cout << n << " ";
+    decPrint(n - 1);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    int ans = fact(n);
+    cout << ans << endl;
+
+    incPrint(n);
+    cout << endl;
+    decPrint(n);
+    return 0;
+}
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+
+const int D = 8;
+
+bool canPlace(int board[D][D],int n,int r,int c)
+{
+    return
+            r >= 0 && r < n &&
+            c >= 0 && c < n &&
+            board[r][c] == 0;
+}
+
+bool solveKnightMove(int board[D][D], int n, int move_no,int curRow, int curCol)
+{
+    if(move_no == n*n)
+    {
+        return true;
+    }
+    // check for possible positions
+    int rowDir[] = {+2, +1, -1, -2, -2, -1, +1, +2};
+    int colDir[] = {+1, +2, +2, +1, -1, -2, -2, -1};
+    // loop in all directions
+    for(int curDir =0 ; curDir < 8; ++curDir)
+    {
+        int newRow = curRow + rowDir[curDir];
+        int newcol = curCol + colDir[curDir];
+        if(canPlace(board, n, newRow, newcol) == true){
+            board[newRow][newcol] = move_no + 1; //place tthe knight
+            bool isSuccess = solveKnightMove(board,n,move_no + 1,newRow, newcol);
+            if(isSuccess == true) return true;
+            board[newRow][newcol] = 0; // erase the knight
+        }
+    }
+    return false;
+}
+
+void printBoard(int board[D][D], int n) {
+    for(int i =0; i < n;++i)
+    {
+        for(int j =0; j < n ; ++j) {
+            cout << setw(3)<< board[i][j]<< "  ";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    int board[D][D] = {0};
+    int n;cin >> n;
+
+    board[0][0] = 1;
+    bool ans = solveKnightMove(board, n, 1,0,0);
+    if(ans == true)
+    {
+        printBoard(board, n);
+    }
+    else
+    {
+        cout << " Cant perform" << endl;
+    }
+    return 0;
+}
+
