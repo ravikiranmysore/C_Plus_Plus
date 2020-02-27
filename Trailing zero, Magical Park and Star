@@ -1,0 +1,176 @@
+/*
+// Trailing Zeros
+#include<iostream>
+using namespace std;
+
+
+int findtrailingzero(int n)
+{
+	int ans = 0;
+	int p = 5;
+	while ((n / p) > 0)
+	{
+		ans += (n / p);
+		p = p * 5;
+	}
+	return ans;
+}
+/* if N = 100: N + (100/5)(n/p) = 20 + (100/5^2) = 4 + (100/5^3) = 0
+   N = 24
+*/
+/*
+int main()
+{
+
+	long long int n;
+	cin >> n;
+	cout << findtrailingzero(n) << endl;
+	getchar();
+	return 0;
+}
+*/
+#include<iostream>
+using namespace std;
+
+void magical_park(char park[][100],int m,int n,int k,int s)
+{
+	bool success = true;
+
+	for (int i = 0; i < m; i++) 
+	{
+		for (int j = 0; j < n; j++)
+		{
+			char ch = park[i][j];
+
+			//check if strength is greater than k, go to next row
+			if (s < k) 
+			{
+				success = false;
+				break;
+			}
+
+			if (ch == '*') 
+			{
+				s += 5;
+			}
+			else if (ch == '.') {
+				s -= 2;
+			}
+			else 
+			{
+				break; // this is to # - blocking
+			}
+			// loose -1 except last row
+			if (j != n - 1) 
+			{
+				s--;
+			}
+		}
+	}
+
+	if (success) {
+		cout << "Yes" << endl;
+		cout << s << endl;
+	}
+	else
+	{
+		cout << "No" << endl;
+	}
+}
+
+int main()
+{
+	int m, n, k, s;
+	cin >> m >> n >> k >> s;
+
+	char park[100][100];
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> park[i][j];
+		}
+	}
+
+	magical_park(park, m, n, k, s);
+
+	getchar();
+	return 0;
+}
+
+// star
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n; cin >> n;
+
+	// first row
+	cout << "*";
+	// space
+	for (int i = 1; i <= (n - 3) / 2; i++)
+	{
+		cout << " ";
+	}
+	// star
+	for (int i = 1; i <= (n + 1) / 2; i++)
+	{
+		cout << "*";
+	}
+	cout << endl;
+
+	// second component
+	for (int row = 1; row <= (n - 3) / 2; row++)
+	{
+		cout << "*";
+		// because of 2 row, inside loop
+		for (int i = 1; i <= (n - 3) / 2; i++)
+		{
+			cout << " ";
+		}
+		cout << "*" << endl;
+	}
+
+	// third component
+	for (int i = 1; i <= n ; i++)
+	{
+		cout << "*";
+	}
+	cout << endl;
+
+	// fourth row
+	for (int rows = 1; rows <= (n - 3) / 2; rows++)
+	{
+		// spaces - 1,2
+		for (int i = 1; i <= (n - 3) / 2 +1; i++)
+		{
+			cout << " ";
+		}
+		// star
+		cout << "*";
+
+		//spaces 4,5
+		for (int i = 1; i <= (n - 3) / 2; i++)
+		{
+			cout << " ";
+		}
+		// star
+		cout << "*" << endl;
+	}
+
+	// fifth component
+	// 4 - star
+	for (int i = 1; i <= (n + 1) / 2; i++)
+	{
+		cout << "*";
+	}
+	//spaces
+	for (int i = 1; i <= (n - 3) / 2; i++)
+	{
+		cout << " ";
+	}
+	// single star
+	cout << "*" << endl;
+
+	getchar();
+	return 0;
+}
