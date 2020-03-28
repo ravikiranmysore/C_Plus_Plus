@@ -1,0 +1,171 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void printArray(int arr[], int n)
+{
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+}
+
+void leftRotatebyOne(int arr[], int n)
+{
+    int temp = arr[0], i;
+    for (i = 0; i < n - 1; i++)
+        arr[i] = arr[i + 1];
+
+    arr[i] = temp;
+}
+
+void leftRotate(int arr[], int n,int d)
+{
+    for (int i = 0; i < d; i++)
+        leftRotatebyOne(arr, n);
+}
+
+void RotRightArray(int arr[], int n,int k)
+{
+    int i, B[n];
+    for(int i = 0; i < n; i++)
+    {
+        B[(i+k)%n] = arr[i];
+    }
+
+    for (int i = 0; i < n; i++)
+        cout << B[i] << " ";
+}
+
+void RotArray_mod(int arr[], int n, int k)
+{
+    int mod = k % n;
+    for (int i = 0; i < n; i++)
+        cout << (arr[(mod + i) % n]) << " ";
+}
+
+void rvereseArray(int arr[], int start, int end)
+{
+    while (start < end)
+    {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+
+void newRot(int arr[], int d, int n)
+{
+    rvereseArray(arr, 0, d-1);  //
+    cout << "Reverse A, we get ArB (1,2) : " ;
+    printArray(arr, n);
+    cout << endl;
+    rvereseArray(arr, d, n-1);  //
+    cout << "Reverse B, we get ArBr (3 to 7) : " ;
+    printArray(arr, n);
+    cout << endl;
+    rvereseArray(arr, 0, n-1);
+    cout << "Reverse all, we get (ArBr) for n = 7, r = 2 : " ;
+    printArray(arr, n);
+    cout << endl;
+}
+
+
+void backwards(int  array [], int number)
+{
+    /*
+  int first = 0;
+  int last = number - 1; // last legal index
+
+  while (first < last)
+  {
+    int temp = array[first];
+    array[first] = array[last];
+    array[last] = temp;
+    ++first;
+    --last;
+  }
+  */
+    int temp = 0;
+    for(int i = 0; i < number/2; i++)
+    {
+        temp = array[i];
+        array[i] = array[number - 1 - i];
+
+        array[number - 1 - i] = temp;
+    }
+}
+
+int main()
+{
+    int arr[] = { 1, 2, 3, 4,5,6,7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printArray(arr, n);
+    cout << endl;
+    int d = 2;
+
+    cout << "\nCLOCK WISE :" << endl;
+    RotRightArray(arr, n,d);
+    cout << "<---last elemts(6,7) to first";
+    cout << endl;
+
+    cout << "\n ANTI CLOCK WISE(Left) :" << endl;
+    for (int i =0; i<n; i++)
+    {
+        cout << "\n  a[ "<< (i+d) << " % "<< n << " ] : " << "a["<< (i + d) % n<<"] : " << arr[(i+d)%n] << endl;
+    }
+
+    newRot(arr, d, n);
+    printArray(arr, n);
+    cout << "<---(3,4) to first, rotation, same as RotArray_mod \n";
+    cout << endl;
+
+
+    int num = 1234567, reversedNumber = 0;
+    while(num != 0)
+    {
+        reversedNumber = reversedNumber*10 + num%10;
+        num = num/10;
+    }
+    cout << "Reversed Number = " << reversedNumber<<endl;
+
+    return 0;
+}
+
+/*
+    RotArray(arr, n,d);
+    cout << "<---last elemts(6,7) to first";
+    cout << endl;
+
+    RotArray_mod(arr, n,d);
+    cout << "<--rot modified : first element to last rotated";
+    cout << endl;
+
+    newRot(arr, d, n);
+    printArray(arr, n);
+    cout << "<---(3,4) to first, rotation, same as RotArray_mod ";
+    cout << endl;
+
+    leftRotate(arr, n,d);
+    printArray(arr, n);
+    cout << "<--same as RotArray_mod";
+    cout << endl;
+
+    int s = 0;
+    int e = n-1;
+    while(s<= e)
+    {
+        std::swap(arr[s],arr[e]);
+        s = s + 1;
+        e = e - 1;
+    }
+    printArray(arr, n);
+    cout << "<--reverse print";
+    cout << endl;
+
+    backwards(arr, n);
+    printArray(arr, n);
+    cout << "<---reverse print";
+    cout << endl;
+*/
