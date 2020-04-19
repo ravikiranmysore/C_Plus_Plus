@@ -1,0 +1,101 @@
+#include<iostream>
+using namespace std;
+
+// our own string function.
+class String
+{
+private:
+	char* m_Buffer;
+	unsigned int m_Size;
+public:
+	String(const char* string)
+	{
+		m_Size = strlen(string);
+		m_Buffer = new char[m_Size + 1];
+		memcpy(m_Buffer, string, m_Size);
+		m_Buffer[m_Size] = 0;
+	}
+	char& operator[](unsigned int index)
+	{
+		return m_Buffer[index];
+	}
+
+	// deep copy
+	String(const String& other)
+		: m_Size(other.m_Size)
+	{
+		m_Buffer = new char[m_Size + 1];
+		memcpy(m_Buffer, other.m_Buffer, m_Size + 1);
+	}
+
+	~String()
+	{
+		delete[] m_Buffer;
+	}
+
+	friend std::ostream& operator<<(std::ostream& stream, const String& string);
+};
+
+std::ostream& operator<<(std::ostream& stream, const String& string)
+{
+	stream << string.m_Buffer;
+	return stream;
+}
+
+class Base
+{
+	int *_ptr;
+	int _val;
+public:
+	Base() : 
+		_ptr{ new int(0) },
+		_val{0}
+	{}
+
+	// deep copy -> to avoid pointing to same memory address
+	Base(const Base& rhs)
+	{
+		_ptr = new int;
+		*_ptr = *rhs._ptr;
+		_val = rhs._val;
+	}
+
+	void setPtr(int ptr) { *_ptr = ptr; }
+	void setVal(int val) { _val = val; }
+	int getPtr() { return *_ptr; }
+	int getVal() { return _val; }
+};
+
+void Print(const String& string)
+{
+	String copy = string;
+	std::cout << string << std::endl;
+}
+int main()
+{
+	String copy = "Print this string";
+	String copy2 = copy;
+	copy[2] = 'R'; // char return operator
+	std::cout << copy << std::endl;
+	std::cout << copy2 << std::endl;
+	
+	Print(copy);
+	Print(copy2);
+
+	// shallow copy , means refered to same object.
+	// deep copy, to different memory address(original and cloned).
+	// deep copy means it will get you original values.
+	Base b1;
+	b1.setPtr(10); b1.setVal(15);
+	{
+		Base b2 = b1; // copying object.
+		b2.setPtr(50); // deep copy -> 15 as output.
+	}
+	
+	cout << "b1 ptr : " << b1.getPtr() << endl;
+	cout << "b1 val : " << b1.getVal() << endl;
+	cout << "b2 ptr : " << b1.getPtr() << endl;
+	cout << "b2 val : " << b1.getVal() << endl;
+
+	std::cin.get();
+}
