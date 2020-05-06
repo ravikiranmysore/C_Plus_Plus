@@ -1,0 +1,109 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<set>
+#include<queue>
+#include <iostream>
+#include <list>
+#include <string>
+#include <algorithm>
+#include <functional>
+#include <array>
+
+struct MyStruct
+{
+	int objId;
+	char grade;
+	string title;
+};
+
+
+vector<MyStruct> popVec(vector<MyStruct> c_vec, int id, char ch, string st)
+{
+	MyStruct stky;
+	stky.grade = ch;
+	stky.objId = id;
+	stky.title = st;
+	c_vec.push_back(stky);
+	return c_vec;
+}
+
+struct A
+{
+	int a;
+	char b;
+	std::string c;
+
+	friend std::ostream& operator <<(std::ostream& os, A const& o)
+	{
+		return os << o.a << '\n'
+			<< o.b << '\n'
+			<< o.c << '\n';
+	}
+};
+
+void Print(MyStruct pS)
+{
+	cout << pS.grade << endl;
+	cout << pS.objId << endl;
+	cout << pS.title << endl;
+	return;
+}
+
+struct Point {
+	int x, y;
+};
+
+int main()
+{
+	MyStruct myst;
+	myst.grade = 'A';
+	myst.objId = 10;
+	myst.title = "Standard";
+    
+	cout << myst.grade << endl;
+	cout << myst.objId << endl;
+	cout << myst.title << endl;
+
+	MyStruct strar[2];
+	strar[0].grade= 'B';
+	strar[0].objId = 20;
+	strar[0].title = "Normal";
+	
+	cout << strar[0].grade << endl;
+	cout << strar[0].objId << endl;
+	cout << strar[0].title << endl;
+
+	vector<MyStruct> C_vec;
+	myst.grade = 'C';
+	myst.objId = 30;
+	myst.title = "Veckty";
+	C_vec.push_back(myst);
+
+	C_vec = popVec(C_vec, 40, 'D', "Sample");
+
+	for (int i = 0; i < C_vec.size(); i++)
+	{
+		cout << C_vec[i].grade << endl;
+		cout << C_vec[i].objId << endl;
+		cout << C_vec[i].title << endl;
+	}
+
+	A a = { 5, 'P', "apple sauce" };
+	std::cout << a;
+    
+	Point p1 = { 0, 1 };
+
+	// Accessing members of point p1 
+	p1.x = 20;
+	cout << "x = " << p1.x << ", y = " << p1.y;
+ 
+	/* 
+	can I iterate over the members of a struct in standard c++ ? 
+	No, standard c++ doesn't provide a method for accomplishing what you are asking for, 
+	you "iterate" elements of a container - you cannot iterate over members of a certain type.
+	"reflection" (as this type of feature is most often referred to isn't part of C++)
+	*/
+
+	return 0;
+}
